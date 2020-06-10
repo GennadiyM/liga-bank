@@ -9,6 +9,21 @@ html {
   box-sizing: inherit;
 }
 
+body {
+  min-width: $min-width;
+  background-color: $main-background;
+  color: $color-text;
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: 400;
+  line-height: $line-height;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  margin: 0;
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -48,8 +63,4 @@ textarea {
 
 .visually-hidden {
   @include visuallyHidden;
-}
-
-h1 {
-  color: red;
 }
