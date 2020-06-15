@@ -11,7 +11,9 @@ $breakpoints-map: (
 @function get-breakpoints-value($value) {
   @if (map-has-key($breakpoints-map, $value)) {
     @return map-get($breakpoints-map, $value);
-  } @else {
+  }
+
+  @else {
     @return $value;
   }
 }
@@ -19,19 +21,27 @@ $breakpoints-map: (
 @mixin media($value-1: false, $value-2: false) {
   $query: 0;
   $query-to: 0;
+
   @if ($value-1 == "from") {
     $query: get-breakpoints-value($value-2) + 1 + px;
+
     @media screen and (min-width: #{$query}) {
       @content;
     }
-  } @else if ($value-2 != false) {
+  }
+
+  @else if ($value-2 != false) {
     $query: get-breakpoints-value($value-1) + 1 + px;
     $query-to: get-breakpoints-value($value-2) + px;
+
     @media screen and (min-width: #{$query}) and (max-width: #{$query-to}) {
       @content;
     }
-  } @else {
+  }
+
+  @else {
     $query: get-breakpoints-value($value-1) + px;
+
     @media screen and (max-width: #{$query}) {
       @content;
     }
