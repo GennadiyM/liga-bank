@@ -1,0 +1,14 @@
+.contacts {
+  background-color: darkorchid;
+  position: relative;
+
+  &::before {
+    display: block;
+    width: 100%;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    content: "Контакты";
+    font-weight: 700;
+  }
+}

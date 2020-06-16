@@ -1,0 +1,14 @@
+.services {
+  background-color: cadetblue;
+  position: relative;
+
+  &::before {
+    display: block;
+    width: 100%;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    content: "Услуги";
+    font-weight: 700;
+  }
+}
