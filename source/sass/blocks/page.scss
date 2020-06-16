@@ -13,6 +13,11 @@
   margin: 0 auto;
 }
 
+.page__layout {
+  padding-left: $padding-desktop;
+  padding-right: $padding-desktop;
+}
+
 .page__header {
   flex-shrink: 0;
 }

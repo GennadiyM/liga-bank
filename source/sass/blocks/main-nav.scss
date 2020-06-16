@@ -1,0 +1,46 @@
+.mainNav {
+  width: 479px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.mainNav__list {
+  @include list-reset;
+
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.mainNav__item {
+  @include style-reset;
+
+  max-width: 200px;
+  display: flex;
+  align-items: center;
+  padding-left: 7.5px;
+  padding-right: 7.5px;
+}
+
+.mainNav a {
+  display: block;
+  padding: 5px;
+  font: inherit;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  color: $color-text;
+  transition: color $transition-2, opacity $transition-2;
+
+  &:hover,
+  &:focus {
+    color: $color-brand;
+    text-decoration: underline;
+    outline: none;
+  }
+
+  &:active {
+    opacity: 0.4;
+  }
+}

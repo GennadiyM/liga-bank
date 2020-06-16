@@ -1,0 +1,56 @@
+.userNav {
+  @include list-reset;
+
+  width: 213px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.userNav__item {
+  @include style-reset;
+}
+
+.userNav__btn {
+  display: flex;
+  align-items: center;
+  color: $color-text;
+  padding: 5px;
+
+  &:hover,
+  &:focus {
+    color: $color-brand;
+    outline: none;
+  }
+
+  &:active {
+    opacity: 0.4;
+  }
+}
+
+.userNav__btnIcon + .userNav__btnText {
+  margin-left: 10px;
+}
+
+.userNav__btnIcon {
+  color: inherit;
+  transition: color $transition-2, opacity $transition-2;
+}
+
+.userNav__btnText {
+  font: inherit;
+  font-size: 16px;
+  line-height: 19px;
+  color: inherit;
+  transition: color $transition-2, opacity $transition-2;
+}
+
+.userNav__btn:hover .userNav__btnText,
+.userNav__btn:focus .userNav__btnText {
+  color: $color-brand;
+  text-decoration: underline;
+}
+
+.userNav__btn:hover .userNav__btnIcon path,
+.userNav__btn:focus .userNav__btnIcon path {
+  fill: $color-brand;
+}
