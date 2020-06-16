@@ -2,6 +2,7 @@
   width: 479px;
   display: flex;
   align-items: flex-end;
+  margin-top: -5px;
 }
 
 .mainNav__list {
@@ -24,7 +25,6 @@
 
 .mainNav a {
   display: block;
-  padding: 5px;
   font: inherit;
   font-style: normal;
   font-weight: normal;
@@ -32,6 +32,7 @@
   line-height: 19px;
   color: $color-text;
   transition: color $transition-2, opacity $transition-2;
+  padding: 5px;
 
   &:hover,
   &:focus {

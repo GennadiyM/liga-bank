@@ -2,7 +2,7 @@
   width: 100%;
   background-color: $color-main-background;
   padding-top: 27px;
-  padding-bottom: 39px;
+  padding-bottom: 32px;
 }
 
 .pageHeader__layout {
@@ -19,6 +19,7 @@
   width: 150px;
   height: 27px;
   flex-shrink: 0;
+  margin-right: 8px;
   transform: translateY(-5px) translateX(-37px);
 }
 
@@ -27,4 +28,8 @@
   align-items: flex-end;
   justify-content: space-between;
   flex-grow: 1;
+}
+
+.pageHeader__mainNav {
+  margin-top: 4px;
 }

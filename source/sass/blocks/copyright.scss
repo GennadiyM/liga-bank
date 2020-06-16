@@ -1,0 +1,20 @@
+.copyright {
+  width: 252px;
+  display: flex;
+  flex-direction: column;
+}
+
+.copyright__logo {
+  @include style-reset;
+
+  margin-top: -15px;
+  margin-bottom: 20px;
+}
+
+.copyright p {
+  @include style-reset;
+
+  font-size: 12px;
+  line-height: 140%;
+  color: $color-text-gray;
+}
