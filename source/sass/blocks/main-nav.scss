@@ -3,6 +3,10 @@
   display: flex;
   align-items: flex-end;
   margin-top: -5px;
+
+  @include media(xl) {
+    width: 415px;
+  }
 }
 
 .mainNav__list {
@@ -21,6 +25,11 @@
   align-items: center;
   padding-left: 7.5px;
   padding-right: 7.5px;
+
+  @include media(xl) {
+    padding-left: 5.5px;
+    padding-right: 5.5px;
+  }
 }
 
 .mainNav a {
@@ -43,5 +52,10 @@
 
   &:active {
     opacity: 0.4;
+  }
+
+  @include media(xl) {
+    font-size: 14px;
+    line-height: 16px;
   }
 }

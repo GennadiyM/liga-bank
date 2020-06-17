@@ -10,7 +10,7 @@ $breakpoints-map: (
 
 @function get-breakpoints-value($value) {
   @if (map-has-key($breakpoints-map, $value)) {
-    @return map-get($breakpoints-map, $value);
+    @return map-get($breakpoints-map, $value) - 1;
   }
 
   @else {

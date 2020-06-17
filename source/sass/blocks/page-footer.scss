@@ -1,19 +1,129 @@
 .pageFooter {
   width: 100%;
   background-color: $color-main-background;
-  padding-top: 27px;
-  padding-bottom: 32px;
+  padding-top: 58px;
+  padding-bottom: 55px;
+
+  @include media(xl) {
+    padding-top: 48px;
+    padding-bottom: 45px;
+  }
+
+  @include media(m) {
+    padding-top: 31px;
+  }
 }
 
 .pageFooter__layout {
   display: flex;
   align-items: flex-start;
-  padding-top: 60px;
-  padding-bottom: 60px;
+  justify-content: space-between;
+
+  @include media(xl) {
+    flex-wrap: wrap;
+  }
+
+  @include media(m) {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+}
+
+.pageFooter__box {
+  @include media(xl) {
+    width: 48%;
+  }
+
+  &--desktopInvisible {
+    display: none;
+
+    @include media(xl) {
+      display: block;
+    }
+
+    @include media(m) {
+      display: none;
+    }
+  }
+
+  &--order-1 {
+    @include media(xl) {
+      order: 1;
+      transform: translateY(8px);
+    }
+
+    @include media(m) {
+      order: 0;
+      transform: none;
+    }
+  }
+
+  &--order-2 {
+    @include media(xl) {
+      order: 2;
+    }
+
+    @include media(m) {
+      order: 0;
+    }
+  }
+
+  &--order-3 {
+    @include media(xl) {
+      order: 3;
+      padding-top: 31px;
+    }
+
+    @include media(m) {
+      order: 0;
+      padding-top: 0;
+    }
+  }
+
+  &--order-4 {
+    @include media(xl) {
+      order: 4;
+      padding-top: 27px;
+    }
+
+    @include media(m) {
+      order: 0;
+      padding-top: 0;
+    }
+  }
+
+  &--order-5 {
+    @include media(xl) {
+      order: 5;
+      transform: translateY(-3px);
+    }
+
+    @include media(m) {
+      order: 0;
+      transform: none;
+    }
+  }
 }
 
 .pageFooter__box + .pageFooter__box {
-  margin-left: 80px;
+  margin-left: 15px;
+
+  @include media(xl) {
+    margin-left: 0;
+  }
+
+  @include media(m) {
+    margin-top: 10px;
+  }
+}
+
+.pageFooter__copyright {
+  transform: translateY(-9px);
+
+  @include media(xl) {
+    transform: none;
+  }
 }
 
 .pageFooter__linkGroup {
@@ -25,10 +135,14 @@
 .pageFooter__linkGroupItem {
   @include style-reset;
 
-  margin-top: 20px;
+  margin-top: 8px;
 
   &:first-child {
     margin-top: 0;
+  }
+
+  @include media(m) {
+    margin-top: 11px;
   }
 }
 
@@ -51,5 +165,9 @@
 
   &:active {
     opacity: 0.4;
+  }
+
+  @include media(m) {
+    font-size: 14px;
   }
 }

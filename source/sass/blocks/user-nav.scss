@@ -1,10 +1,13 @@
 .userNav {
   @include list-reset;
 
-  width: 213px;
+  width: 203px;
   display: flex;
   flex-wrap: wrap;
-  margin: -5px;
+
+  @include media(xl) {
+    width: auto;
+  }
 }
 
 .userNav__item {
@@ -15,7 +18,6 @@
   display: flex;
   align-items: center;
   color: $color-text;
-  padding: 5px;
 
   &:hover,
   &:focus {
@@ -35,6 +37,20 @@
 .userNav__btnIcon {
   color: inherit;
   transition: color $transition-2, opacity $transition-2;
+  font-size: 0;
+  line-height: 0;
+  transform: translateY(-2px);
+
+  @include media(m) {
+    transform: none;
+  }
+}
+
+.userNav__btnIcon svg {
+  @include media(m) {
+    width: 14px;
+    height: 16px;
+  }
 }
 
 .userNav__btnText {
@@ -43,6 +59,10 @@
   line-height: 19px;
   color: inherit;
   transition: color $transition-2, opacity $transition-2;
+
+  @include media(xl) {
+    display: none;
+  }
 }
 
 .userNav__btn:hover .userNav__btnText,

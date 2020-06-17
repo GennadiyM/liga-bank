@@ -1,13 +1,21 @@
 .social {
   @include list-reset;
 
-  width: 137px;
+  width: 115px;
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-end;
+  margin-right: -5px;
 
-  margin-top: -5px;
-  margin-left: -5px;
-  margin-right: -15px;
+  @include media(xl) {
+    width: 132px;
+    margin-right: 0;
+    margin-left: -10px;
+  }
+
+  @include media(m) {
+    margin-top: 4px;
+  }
 }
 
 .social__item {
@@ -16,7 +24,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 10px;
+}
+
+.social__item + .social__item {
+  margin-left: 5px;
+
+  @include media(xl) {
+    margin-left: 10px;
+  }
 }
 
 .social__item a {
@@ -26,11 +41,15 @@
   font-size: 0;
   line-height: 0;
   padding: 5px;
-  transition: color $transition-2;
+  transition: color $transition-2, opacity $transition-2;
 
   &:hover,
   &:focus {
     color: $color-brand;
     outline: none;
+  }
+
+  &:active {
+    opacity: 0.4;
   }
 }

@@ -2,20 +2,26 @@
   @include style-reset;
 
   display: flex;
+  flex-direction: column;
   height: 100%;
 }
 
-.page__wrapper {
-  display: flex;
-  flex-direction: column;
+.page__layout {
   width: 100%;
   max-width: 1440px;
-  margin: 0 auto;
-}
-
-.page__layout {
   padding-left: $padding-desktop;
   padding-right: $padding-desktop;
+  margin: 0 auto;
+
+  @include media(xl) {
+    padding-left: $padding-tablet;
+    padding-right: $padding-tablet;
+  }
+
+  @include media(m) {
+    padding-left: $padding-mobile;
+    padding-right: $padding-mobile;
+  }
 }
 
 .page__header {
@@ -32,6 +38,6 @@
 
 .page__block {
   width: 100%;
-  height: 400px;
+  min-height: 400px;
   padding-bottom: 110px;
 }
