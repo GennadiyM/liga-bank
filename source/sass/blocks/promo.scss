@@ -14,15 +14,15 @@
 
   @include media(xl) {
     min-height: 300px;
-    padding-top: 76px;
+    padding-top: 64px;
     padding-bottom: 76px;
   }
 
   @include media(m) {
     min-height: 226px;
-    padding-top: 48px;
+    padding-top: 40px;
     padding-right: 100px;
-    padding-bottom: 48px;
+    padding-bottom: 26px;
     padding-left: 15px;
   }
 }
@@ -34,6 +34,7 @@
 
   @include media(xl) {
     margin-left: 86px;
+    min-height: 161px;
   }
 
   @include media(m) {
@@ -54,7 +55,7 @@
   @include media(xl) {
     font-size: 46px;
     line-height: 54px;
-    margin-bottom: 20px;
+    margin-bottom: 7px;
   }
 
   @include media(m) {
@@ -111,6 +112,14 @@
 
 .promo__btn {
   margin-top: 34px;
+
+  @include media(xl) {
+    margin-top: 30px;
+  }
+
+  @include media(m) {
+    margin-top: 22px;
+  }
 }
 
 .promo__swiper-pagination {
@@ -124,7 +133,15 @@
 }
 
 .promo__swiper-pagination.swiper-pagination-bullets {
-  bottom: 15px;
+  bottom: 40px;
+
+  @include media(xl) {
+    bottom: 15px;
+  }
+
+  @include media(m) {
+    bottom: 10px;
+  }
 }
 
 .promo__bullet {
@@ -146,6 +163,13 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  @include media(m) {
+    width: 6px;
+    height: 6px;
+    margin-left: 3px;
+    margin-right: 3px;
   }
 
   &--active {
