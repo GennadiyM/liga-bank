@@ -1,0 +1,12 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__area + .form__area {
+  margin-top: 30px;
+}
+
+.form--login-popup .form__btn {
+  margin-top: 30px;
+}
