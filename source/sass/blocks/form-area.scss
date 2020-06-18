@@ -9,6 +9,12 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
+    @include media(m) {
+      flex-direction: column-reverse;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
   }
 }
 
@@ -121,4 +127,9 @@
   font-size: 22px;
   line-height: 140%;
   color: $color-text;
+
+  @include media(m) {
+    width: 100%;
+    text-align: left;
+  }
 }

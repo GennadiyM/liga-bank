@@ -1,9 +1,24 @@
 .services {
   padding-top: 60px;
+  width: 100%;
+  max-width: $max-width;
+  padding-left: $padding-desktop;
+  padding-right: $padding-desktop;
+  margin: 0 auto;
+
+  @include media(xl) {
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .services__thumbs-swiper-container {
   width: 100%;
+
+  @include media(xl) {
+    display: none;
+  }
 }
 
 .services__thumbs-swiper-slide {
@@ -29,6 +44,11 @@
   display: flex;
   justify-content: space-between;
   padding: 60px 135px 60px 70px;
+
+  @include media(xl) {
+    padding-left: 45px;
+    padding-right: 45px;
+  }
 }
 
 .services__main {
@@ -45,6 +65,11 @@
   font-size: 22px;
   line-height: 140%;
   margin-bottom: 40px;
+
+  @include media(xl) {
+    font-size: 18px;
+    margin-bottom: 35px;
+  }
 }
 
 .services__main p {
@@ -52,11 +77,19 @@
 
   font-size: 18px;
   line-height: 130%;
+
+  @include media(xl) {
+    font-size: 16px;
+  }
 }
 
 .services__main ul {
   list-style-image: url("../img/svg/list-mark.svg");
   margin: 0 0 40px 0;
+
+  @include media(xl) {
+    margin-bottom: 35px;
+  }
 }
 
 .services__main li + li {
