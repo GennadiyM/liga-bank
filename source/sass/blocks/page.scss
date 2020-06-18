@@ -43,6 +43,10 @@
   @include media(xl) {
     padding-bottom: 80px;
   }
+
+  @include media(m) {
+    padding-bottom: 60px;
+  }
 }
 
 .page__blockTitle {
@@ -57,5 +61,10 @@
   @include media(xl) {
     font-size: 32px;
     margin-bottom: 45px;
+  }
+
+  @include media(m) {
+    font-size: 22px;
+    margin-bottom: 35px;
   }
 }
