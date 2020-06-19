@@ -87,12 +87,9 @@
   @include style-reset;
 
   font-weight: 500;
-  font-size: 22px;
+  //font-size: 22px;
+  font-size: 20px;
   line-height: 140%;
-
-  @include media(xl) {
-    font-size: 22px;
-  }
 }
 
 .grayBox__caption {
