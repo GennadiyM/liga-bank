@@ -38,15 +38,20 @@ var popupLogin = function () {
   var inputLogin = areaLogin.querySelector('input');
   var btnShowPassword = popup.querySelector(Selector.BTN_SHOW_PASSWORD);
   var inputs = popup.querySelectorAll('input');
-
-  var storageName = localStorage.getItem('name');
-  var storagePassword = localStorage.getItem('password');
   var statusPassword = true;
 
-  var onFocusInput = function (evt) {
-    var focusInput = evt.target;
-    var formAreaFocusInput = focusInput.closest(Selector.FORM_AREA);
-    formAreaFocusInput.classList.toggle(Class.AREA_ERROR, false);
+  localStorage.setItem('name', '');
+  localStorage.setItem('password', '');
+
+  var setLocalstorage = function () {
+    localStorage.setItem('name', inputLogin.value);
+    localStorage.setItem('password', inputPassword.value);
+  };
+
+
+  var delClassError = function (element) {
+    var formArea = element.closest(Selector.FORM_AREA);
+    formArea.classList.toggle(Class.AREA_ERROR, false);
   };
 
   var addEventListener = function (element) {
@@ -55,19 +60,42 @@ var popupLogin = function () {
 
   var removeEventListener = function (element) {
     element.removeEventListener('focus', onFocusInput);
+    delClassError(element);
   };
 
   var getFocusInput = function () {
     inputLogin.focus();
-
-    if (storageName) {
-      inputLogin.value = storageName;
+    if (localStorage.getItem('name')) {
+      inputLogin.value = localStorage.getItem('name');
       inputPassword.focus();
     }
-    if (storagePassword) {
-      inputPassword.value = storagePassword;
+    if (localStorage.getItem('password')) {
+      inputPassword.value = localStorage.getItem('password');
       inputLogin.focus();
     }
+  };
+
+  var switchShowPassword = function () {
+    inputPassword.type = statusPassword ? 'password' : 'text';
+  };
+
+  var getClosePopup = function () {
+    popup.classList.remove(Class.POPUP_SHOW);
+    overlay.classList.remove(Class.OVERLAY_SHOW);
+    statusPassword = true;
+    switchShowPassword();
+    btnShowPassword.removeEventListener('click', onClickBtnShowPassword);
+    btnOpenPopup.addEventListener('click', onClickBtnShowPopup);
+    btnClosePopup.removeEventListener('click', onClosePopup);
+    inputs.forEach(function (currentValue) {
+      removeEventListener(currentValue);
+    });
+    setLocalstorage();
+  };
+
+  var onFocusInput = function (evt) {
+    var focusInput = evt.target;
+    delClassError(focusInput);
   };
 
   var onClickBtnShowPopup = function (env) {
@@ -86,27 +114,10 @@ var popupLogin = function () {
     });
   };
 
-  var getClosePopup = function () {
-    popup.classList.remove(Class.POPUP_SHOW);
-    overlay.classList.remove(Class.OVERLAY_SHOW);
-    statusPassword = true;
-    switchShowPassword();
-    btnShowPassword.removeEventListener('click', onClickBtnShowPassword);
-    btnOpenPopup.addEventListener('click', onClickBtnShowPopup);
-    btnClosePopup.removeEventListener('click', onClosePopup);
-    inputs.forEach(function (currentValue) {
-      removeEventListener(currentValue);
-    });
-  };
-
   var onClosePopup = function (env) {
     env.preventDefault();
 
     getClosePopup();
-  };
-
-  var switchShowPassword = function () {
-    inputPassword.type = statusPassword ? 'password' : 'text';
   };
 
   var onClickBtnShowPassword = function (env) {
@@ -124,9 +135,7 @@ var popupLogin = function () {
   };
 
   var onClickBtnSubmit = function (evt) {
-    storageName = localStorage.setItem('name', inputLogin.value);
-    storagePassword = localStorage.setItem('password', inputPassword.value);
-
+    setLocalstorage();
     if (!inputPassword.value || !inputLogin.value) {
       evt.preventDefault();
       if (!inputPassword.value) {
