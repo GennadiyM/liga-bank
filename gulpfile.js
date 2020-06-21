@@ -13,7 +13,6 @@ var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
 var sassGlob = require('gulp-sass-glob');
 var csso = require('gulp-csso');
-var purgecss = require('gulp-purgecss')
 
 // image
 var imagemin = require('gulp-imagemin');
@@ -38,9 +37,6 @@ gulp.task('css', function () {
     .pipe(sassGlob())
     .pipe(sass())
     .pipe(postcss([ autoprefixer() ]))
-    .pipe(purgecss({
-      content: ['source/*.html']
-    }))
     .pipe(csso())
     .pipe(rename('style.min.css'))
     .pipe(sourcemap.write('.'))
