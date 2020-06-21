@@ -4,13 +4,17 @@
   "description": "Аклселератор Лига Банк",
   "author": "Maksimov",
   "devDependencies": {
-    "@babel/core": "^7.10.2",
+    "@babel/core": "^7.10.3",
+    "@babel/preset-env": "^7.10.3",
     "@htmlacademy/editorconfig-cli": "1.x",
     "autoprefixer": "9.5.x",
+    "babel-loader": "^8.1.0",
     "browser-sync": "2.26.x",
+    "chosen-js": "^1.8.7",
     "eslint": "4.16.0",
     "eslint-config-htmlacademy": "0.4.x",
     "gulp": "4.0.x",
+    "gulp-concat": "^2.6.1",
     "gulp-csso": "^3.0.1",
     "gulp-imagemin": "^5.0.3",
     "gulp-plumber": "1.2.x",
@@ -21,6 +25,7 @@
     "gulp-sass-glob": "^1.1.0",
     "gulp-sourcemaps": "2.6.x",
     "gulp-svgstore": "^7.0.1",
+    "gulp-uglify": "^3.0.2",
     "gulp-webp": "^4.0.1",
     "jquery": "^3.5.1",
     "normalize.css": "^8.0.1",
@@ -59,7 +64,6 @@
     "node": "8.15"
   },
   "dependencies": {
-    "del": "^4.1.1",
-    "picturefill": "^3.0.3"
+    "del": "^4.1.1"
   }
 }
