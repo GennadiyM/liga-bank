@@ -28,7 +28,7 @@ var webpack = require('webpack-stream');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 
-var isDev = false;
+var isDev = true;
 
 gulp.task('css', function () {
   return gulp.src('source/sass/style.scss')
@@ -59,13 +59,14 @@ gulp.task('js', function () {
             use: {
               loader: 'babel-loader',
               options: {
-                presets: ['@babel/preset-env']
+                presets: ['@babel/preset-env'],
               }
-            }
+            },
           }
         ]
       }
     }))
+    .pipe(uglify())
     .pipe(gulp.dest('build/js'))
     .pipe(server.stream());
 });
