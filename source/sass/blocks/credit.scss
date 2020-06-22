@@ -13,12 +13,13 @@
   margin-right: 30px;
 
   &--right {
+    margin-top: 5px;
     margin-right: 0;
     margin-left: auto;
   }
 
   &--center {
-    margin-top: 60px;
+    margin-top: 67px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -26,6 +27,7 @@
   @include media(xl) {
     width: 100%;
     max-width: none;
+    margin-left: 0;
     margin-right: 0;
   }
 }

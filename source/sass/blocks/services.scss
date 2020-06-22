@@ -125,6 +125,10 @@
 }
 
 .services__img {
+  margin-top: 6px;
+  width: 440px;
+  height: 290px;
+
   @include media(m) {
     position: absolute;
     right: 0;
@@ -132,6 +136,7 @@
     z-index: -1;
     width: 36%;
     max-width: 170px;
+    margin-top: 0;
 
     img {
       width: 100%;

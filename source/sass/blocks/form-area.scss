@@ -37,10 +37,6 @@
   z-index: 1;
 }
 
-.formArea__slot + .formArea__caption {
-  margin-top: 7px;
-}
-
 .formArea__input {
   width: 100%;
   min-height: 60px;
@@ -59,6 +55,12 @@
   &--withBtn {
     padding-right: 70px;
   }
+}
+
+.formArea--withoutLabel .formArea__input {
+  font-weight: 400;
+  font-size: 18px;
+  padding: 19px 24px 14px;
 }
 
 .formArea__visibleBtn {
@@ -93,11 +95,17 @@
 }
 
 .formArea__caption {
+  margin-top: 7px;
+
   &--right {
     display: flex;
     justify-content: flex-end;
     align-items: center;
   }
+}
+
+.formArea--pixel-perfect .formArea__caption {
+  margin-top: 1px;
 }
 
 .formArea__caption a {

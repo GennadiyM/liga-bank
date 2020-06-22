@@ -1,6 +1,7 @@
 .form {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .form__area + .form__area {
@@ -14,6 +15,7 @@
 .form__list {
   @include list-reset;
 
+  width: 100%;
   margin-bottom: 30px;
 }
 
@@ -21,8 +23,8 @@
   @include style-reset;
 
   border-bottom: 1px solid $color-form-line;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 14px;
+  padding-bottom: 10px;
 }
 
 .form__grid {
