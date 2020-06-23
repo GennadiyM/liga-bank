@@ -17,6 +17,7 @@
   <link rel="preload" href="fonts/roboto-bold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/roboto-medium.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/roboto-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=cad0cd31-c5d4-49f9-899d-17e864dc86e4&lang=ru_RU" type="text/javascript"></script>
 </head>
 <body class="page">
 <div style="display: none">
@@ -574,21 +575,21 @@
           <ul class="contacts__optionGroup optionGroup">
             <li class="optionGroup__item">
               <label class="option option--xs">
-                <input class="option__input" type="checkbox" checked>
+                <input class="option__input" value="russia" type="checkbox" checked>
                 <span class="option__element"></span>
                 <span class="option__label">Россия</span>
               </label>
             </li>
             <li class="optionGroup__item">
               <label class="option option--xs">
-                <input class="option__input" type="checkbox" checked>
+                <input class="option__input" value="cis" type="checkbox" checked>
                 <span class="option__element"></span>
                 <span class="option__label">СНГ</span>
               </label>
             </li>
             <li class="optionGroup__item">
               <label class="option option--xs">
-                <input class="option__input" type="checkbox">
+                <input class="option__input" value="europe" type="checkbox">
                 <span class="option__element"></span>
                 <span class="option__label">Европа</span>
               </label>
@@ -717,14 +718,14 @@
     <label class="form__area formArea formArea--smallLabel js-area-login">
       <span class="formArea__label">Логин</span>
       <span class="formArea__slot">
-        <input class="formArea__input" type="text" required="">
+        <input class="formArea__input" type="text" required>
       <span class="formArea__error">Заполните поле</span>
       </span>
     </label>
     <div class="form__area formArea formArea--smallLabel js-area-password">
       <label class="formArea__label" for="login-password">Пароль</label>
       <div class="formArea__slot">
-        <input class="formArea__input formArea__input--withBtn" id="login-password" type="password" required="">
+        <input class="formArea__input formArea__input--withBtn" id="login-password" type="password" required autocomplete="on">
         <button class="formArea__visibleBtn js-password-show" type="button">
           <svg width="22px" height="12px">
             <use xlink:href="#icon-eye"></use>

@@ -4,6 +4,7 @@ import promo from './components/promo.js';
 import select from './components/select.js';
 import services from './components/services.js';
 import popupLogin from './components/popup-login.js';
+import contacts from './components/contacts.js';
 
 document.addEventListener('DOMContentLoaded', function () {
   select();
@@ -13,4 +14,5 @@ document.addEventListener('DOMContentLoaded', function () {
 window.onload = function () {
   promo();
   services();
+  contacts();
 };
