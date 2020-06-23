@@ -1,3 +1,5 @@
+import ymaps from 'ymaps';
+
 var contacts = function () {
   var Selector = {
     CONTACTS: '.js-contacts',
@@ -84,7 +86,7 @@ var contacts = function () {
   var getObjectManager = function (mapPointList) {
     var objectManager = {
       type: 'FeatureCollection',
-      features: []
+      features: [],
     };
 
     mapPointList.forEach(function (mapPointItem) {
@@ -93,7 +95,7 @@ var contacts = function () {
         id: mapPointItem.id,
         geometry: {
           type: 'Point',
-          coordinates: mapPointItem.coordinates
+          coordinates: mapPointItem.coordinates,
         },
       };
       objectManager.features.push(city);
@@ -102,55 +104,41 @@ var contacts = function () {
     return objectManager;
   };
 
+  ymaps
+      .load('https://api-maps.yandex.ru/2.1/?apikey=cad0cd31-c5d4-49f9-899d-17e864dc86e4&lang=ru_RU')
+      .then(function (maps) {
+        var myMap = new maps.Map(map, {
+          center: [55.76, 37.64],
+          zoom: 4,
+        });
 
+        var objectManager = new maps.ObjectManager();
 
+        objectManager.objects.options.set('preset', 'islands#greenDotIcon');
+        objectManager.clusters.options.set('preset', 'islands#greenClusterIcons');
+        myMap.geoObjects.add(objectManager);
+        var addEventLisstener = function (element) {
+          element.addEventListener('change', onChangeInput);
+        };
 
-  // Функция ymaps.ready() будет вызвана, когда
-  // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
-  ymaps.ready(init);
+        var onChangeInput = function (evt) {
+          var currentInput = evt.target;
+          var currentCoutry = currentInput.value;
 
-  function init() {
-    var myMap = new ymaps.Map(map, {
-        center: [55.76, 37.64],
-        zoom: 3,
-      }),
-      objectManager = new ymaps.ObjectManager();
+          if (currentInput.checked) {
+            objectManager.add(getObjectManager(countryMap[currentCoutry]));
+          } else {
+            objectManager.remove(getObjectManager(countryMap[currentCoutry]));
+          }
+        };
 
-    // Чтобы задать опции одиночным объектам и кластерам,
-    // обратимся к дочерним коллекциям ObjectManager.
-    objectManager.objects.options.set('preset', 'islands#greenDotIcon');
-    objectManager.clusters.options.set('preset', 'islands#greenClusterIcons');
-    myMap.geoObjects.add(objectManager);
-
-    var addEventLisstener = function(element) {
-      element.addEventListener('change', onChangeInput);
-    };
-
-    var onChangeInput = function(evt) {
-      var currentInput = evt.target;
-      var currentCoutry = currentInput.value;
-
-      if (currentInput.checked) {
-        objectManager.add(getObjectManager(countryMap[currentCoutry]));
-      } else {
-        objectManager.remove(getObjectManager(countryMap[currentCoutry]));
-      }
-    };
-
-    inputs.forEach(function (input) {
-      addEventLisstener(input);
-
-      if (input.checked) {
-        objectManager.add(getObjectManager(countryMap[input.value]));
-      }
-
-    });
-
-    // objectManager.add(getObjectManager(countryMap.russia));
-    // objectManager.add(getObjectManager(countryMap.cis));
-    // objectManager.remove(getObjectManager(countryMap.europe));
-  }
+        inputs.forEach(function (input) {
+          addEventLisstener(input);
+          if (input.checked) {
+            objectManager.add(getObjectManager(countryMap[input.value]));
+          }
+        });
+      });
 };
 
 export default contacts;
-
