@@ -61,6 +61,10 @@
     padding-right: 15px;
   }
 
+  &:disabled {
+    opacity: 1;
+  }
+
   &--withBtn {
     padding-right: 70px;
 

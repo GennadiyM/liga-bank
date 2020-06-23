@@ -54,10 +54,6 @@ textarea {
   outline: none;
 }
 
-input[type="text"]:disabled {
-  color: $color-text;
-}
-
 .visually-hidden {
   @include visuallyHidden;
 }
