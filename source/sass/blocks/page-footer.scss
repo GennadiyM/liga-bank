@@ -5,7 +5,7 @@
   padding-bottom: 55px;
 
   @include media(xl) {
-    padding-top: 48px;
+    padding-top: 50px;
     padding-bottom: 45px;
   }
 
@@ -32,7 +32,7 @@
 
 .pageFooter__box {
   @include media(xl) {
-    width: 48%;
+    width: 48.5%;
   }
 
   &--desktopInvisible {
@@ -161,10 +161,19 @@
     color: $color-brand;
     outline: none;
     text-decoration: underline;
+
+    @include media(xl) {
+      color: $color-text;
+      text-decoration: none;
+    }
   }
 
   &:active {
     opacity: 0.4;
+
+    @include media(xl) {
+      opacity: 1;
+    }
   }
 
   @include media(m) {

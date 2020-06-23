@@ -15,11 +15,16 @@
 
   @include media(xl) {
     font-size: 18px;
+    margin-bottom: 13px;
   }
 }
 
 .element--top .element__label {
   margin-bottom: 22px;
+
+  @include media(xl) {
+    margin-bottom: 18px;
+  }
 }
 
 .element__slot {
@@ -38,5 +43,9 @@
 }
 
 .element__listItem + .element__listItem {
-  margin-top: 19px;
+  margin-top: 20px;
+
+  @include media(xl) {
+    margin-top: 15px;
+  }
 }

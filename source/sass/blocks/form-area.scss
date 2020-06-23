@@ -27,6 +27,10 @@
   margin-bottom: 9px;
 }
 
+.formArea--smallLabel .formArea__label {
+  margin-bottom: 4px;
+}
+
 .formArea--withoutLabel .formArea__label {
   @include visuallyHidden;
 }
@@ -60,7 +64,7 @@
 .formArea--withoutLabel .formArea__input {
   font-weight: 400;
   font-size: 18px;
-  padding: 19px 24px 14px;
+  padding: 16px 23px 14px;
 }
 
 .formArea__visibleBtn {
@@ -87,10 +91,18 @@
   &:focus {
     color: $color-brand;
     outline: none;
+
+    @include media(xl) {
+      color: $color-text;
+    }
   }
 
   &:active {
     opacity: 0.4;
+
+    @include media(xl) {
+      opacity: 1;
+    }
   }
 }
 
@@ -105,7 +117,7 @@
 }
 
 .formArea--pixel-perfect .formArea__caption {
-  margin-top: 1px;
+  margin-top: 3px;
 }
 
 .formArea__caption a {

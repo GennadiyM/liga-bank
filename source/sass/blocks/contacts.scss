@@ -4,9 +4,14 @@
 
 .contacts__top {
   background-color: $color-main-background;
-  padding-top: 33px;
-  padding-bottom: 29px;
+  padding-top: 34px;
+  padding-bottom: 28px;
   border-bottom: 1px solid $color-range;
+
+  @include media(xl) {
+    padding-top: 31px;
+    padding-bottom: 31px;
+  }
 }
 
 .contacts__map {
@@ -15,4 +20,12 @@
   background-image: url("../img/map/map.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+
+  @include media(xl) {
+    background-image: url("../img/map/map-tablet.jpg");
+  }
+
+  @include media(m) {
+    background-image: url("../img/map/map-mob.jpg");
+  }
 }

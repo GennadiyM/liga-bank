@@ -27,6 +27,11 @@
   padding-right: 5px;
   margin-left: -16px;
 
+  @include media(xl) {
+    font-size: 16px;
+    margin-left: -23px;
+  }
+
   @include media(m) {
     width: 95px;
   }
@@ -34,6 +39,10 @@
 
 .calculate--contribution .calculate__input {
   margin-left: -30px;
+
+  @include media(xl) {
+    margin-left: -37px;
+  }
 }
 
 .calculate--term .calculate__input {
@@ -52,6 +61,10 @@
   text-align: left;
   padding-top: 15px;
   padding-bottom: 16px;
+
+  @include media(xl) {
+    font-size: 16px;
+  }
 
   @include media(m) {
     width: 95px;
@@ -109,12 +122,17 @@
   &:hover,
   &:focus {
     outline: none;
+  }
 
-    &::before,
-    &::after {
-      background-color: $color-brand;
+  &:hover::before,
+  &:focus::after {
+    background-color: $color-brand;
+
+    @include media(xl) {
+      background-color: $color-text;
     }
   }
+
 
   &:active {
     opacity: 0.4;

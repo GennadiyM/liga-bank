@@ -40,16 +40,20 @@
   width: 100%;
   padding-bottom: 97px;
 
-  &--contacts {
-    padding-bottom: 110px;
-  }
-
   @include media(xl) {
-    padding-bottom: 80px;
+    padding-bottom: 70px;
   }
 
   @include media(m) {
     padding-bottom: 60px;
+  }
+
+  &--contacts {
+    padding-bottom: 110px;
+
+    @include media(xl) {
+      padding-bottom: 80px;
+    }
   }
 }
 
@@ -64,7 +68,7 @@
 
   @include media(xl) {
     font-size: 32px;
-    margin-bottom: 45px;
+    margin-bottom: 28px;
   }
 
   @include media(m) {
@@ -75,4 +79,8 @@
 
 .page__block--contacts .page__blockTitle {
   margin-bottom: 55px;
+
+  @include media(xl) {
+    margin-bottom: 33px;
+  }
 }
