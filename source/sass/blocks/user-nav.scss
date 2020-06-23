@@ -18,6 +18,7 @@
   display: flex;
   align-items: center;
   color: $color-text;
+  position: relative;
 
   &:hover,
   &:focus {
@@ -27,6 +28,20 @@
 
   &:active {
     opacity: 0.4;
+  }
+
+  &::after {
+    @include media(xl) {
+      display: block;
+      width: 200%;
+      height: 200%;
+      content: "";
+      background-color: transparent;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 }
 
