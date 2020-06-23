@@ -24,10 +24,18 @@
   &:focus {
     color: $color-brand;
     outline: none;
+
+    @include media(xl) {
+      color: $color-text;
+    }
   }
 
   &:active {
     opacity: 0.4;
+
+    @include media(xl) {
+      opacity: 1;
+    }
   }
 
   &::after {
