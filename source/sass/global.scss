@@ -54,6 +54,10 @@ textarea {
   outline: none;
 }
 
+input[type="text"]:disabled {
+  opacity: 1;
+}
+
 .visually-hidden {
   @include visuallyHidden;
 }
