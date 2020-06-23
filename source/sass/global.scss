@@ -54,7 +54,7 @@ textarea {
   outline: none;
 }
 
-input:disabled {
+input[type="text"]:disabled {
   color: $color-text;
 }
 
