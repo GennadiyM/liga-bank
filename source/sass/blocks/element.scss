@@ -17,6 +17,11 @@
     font-size: 18px;
     margin-bottom: 13px;
   }
+
+  @include media(m) {
+    font-size: 16px;
+    margin-bottom: 9px;
+  }
 }
 
 .element--top .element__label {
@@ -24,6 +29,10 @@
 
   @include media(xl) {
     margin-bottom: 18px;
+  }
+  
+  @include media(xl) {
+    margin-bottom: 14px;
   }
 }
 
@@ -47,5 +56,9 @@
 
   @include media(xl) {
     margin-top: 15px;
+  }
+
+  @include media(m) {
+    margin-top: 9px;
   }
 }

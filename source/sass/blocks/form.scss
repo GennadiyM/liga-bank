@@ -6,10 +6,18 @@
 
 .form__area + .form__area {
   margin-top: 25px;
+
+  @include media(m) {
+    margin-top: 20px;
+  }
 }
 
 .form--login-popup .form__btn {
   margin-top: 27px;
+
+  @include media(m) {
+    margin-top: 30px;
+  }
 }
 
 .form__list {
@@ -25,6 +33,10 @@
   border-bottom: 1px solid $color-form-line;
   padding-top: 14px;
   padding-bottom: 10px;
+
+  @include media(m) {
+    padding: 15px 0 13px;
+  }
 }
 
 .form__grid {

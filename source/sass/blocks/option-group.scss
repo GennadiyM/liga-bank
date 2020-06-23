@@ -9,4 +9,8 @@
 
 .optionGroup__item + .optionGroup__item {
   margin-left: 32px;
+
+  @include media(m) {
+    margin-left: 23px;
+  }
 }

@@ -12,7 +12,7 @@
   }
 
   @include media(m) {
-    padding: 40px 15px;
+    padding: 35px 15px;
   }
 
   &--xs {
@@ -42,6 +42,11 @@
   @include media(xl) {
     font-size: 22px;
   }
+
+  @include media(m) {
+    font-size: 18px;
+    margin-bottom: 22px;
+  }
 }
 
 .grayBox--xs .grayBox__title {
@@ -52,6 +57,11 @@
     font-size: 18px;
     margin-bottom: 24px;
   }
+
+  @include media(m) {
+    font-size: 16px;
+    margin-bottom: 19px;
+  }
 }
 
 .grayBox__grid {
@@ -60,7 +70,8 @@
   margin-bottom: 34px;
 
   @include media(m) {
-    margin-top: -25px;
+    margin-top: -13px;
+    margin-bottom: 28px;
   }
 }
 
@@ -73,14 +84,15 @@
   @include media(xl) {
     justify-content: flex-start;
   }
+
+  @include media(m) {
+    flex-direction: column;
+    padding-top: 0;
+  }
 }
 
 .grayBox__cell {
   width: 200px;
-
-  &--small {
-    width: 156px;
-  }
 
   @include media(xl) {
     width: 227px;
@@ -88,9 +100,21 @@
 
   @include media(m) {
     width: 100%;
-    padding-top: 25px;
+    padding-top: 13px;
     padding-left: 0;
     padding-right: 0;
+  }
+
+  &--small {
+    width: 156px;
+
+    @include media(xl) {
+      width: 227px;
+    }
+
+    @include media(m) {
+      width: 100%;
+    }
   }
 }
 
@@ -101,6 +125,11 @@
   font-size: 22px;
   line-height: 140%;
   margin-bottom: 2px;
+
+  @include media(m) {
+    font-size: 18px;
+    margin-bottom: 1px;
+  }
 }
 
 .grayBox__caption {

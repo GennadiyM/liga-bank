@@ -56,8 +56,17 @@
   padding-right: 24px;
   background-color: transparent;
 
+  @include media(m) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
   &--withBtn {
     padding-right: 70px;
+
+    @include media(m) {
+      padding-left: 61px;
+    }
   }
 }
 
@@ -65,6 +74,10 @@
   font-weight: 400;
   font-size: 18px;
   padding: 16px 23px 14px;
+
+  @include media(m) {
+    padding: 14px 12px 14px;
+  }
 }
 
 .formArea__visibleBtn {
@@ -104,6 +117,10 @@
       opacity: 1;
     }
   }
+
+  @include media(m) {
+    right: 15px;
+  }
 }
 
 .formArea__caption {
@@ -113,6 +130,10 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+
+    @include media(m) {
+      display: none;
+    }
   }
 }
 
@@ -156,11 +177,17 @@
   line-height: 140%;
   color: $color-text;
 
+  &:disabled {
+    color: $color-text;
+  }
+
   @include media(m) {
     width: 100%;
+    font-size: 18px;
     text-align: left;
   }
 }
+
 
 .formArea__error {
   display: none;

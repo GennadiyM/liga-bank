@@ -4,17 +4,9 @@
   flex-direction: column;
   width: 200px;
 
-  @include media(m) {
-    padding-top: 13px;
-  }
-
   &--small {
     width: 155px;
     transform: translateX(4px);
-
-    @include media(m) {
-      padding-top: 10px;
-    }
   }
 }
 
