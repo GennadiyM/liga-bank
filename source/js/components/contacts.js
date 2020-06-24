@@ -5,7 +5,6 @@ var contacts = function () {
     CONTACTS: '.js-contacts',
     MAP: '.contacts__map',
     INPUT: '.option__input',
-    // OPTION_GROUP: 'optionGroup',
   };
 
   var countryMap = {
@@ -113,10 +112,12 @@ var contacts = function () {
         });
 
         var objectManager = new maps.ObjectManager();
-
-        objectManager.objects.options.set('preset', 'islands#greenDotIcon');
-        objectManager.clusters.options.set('preset', 'islands#greenClusterIcons');
+        objectManager.objects.options.set('iconLayout', 'default#image');
+        objectManager.objects.options.set('iconImageHref', 'img/map/location.svg');
+        objectManager.objects.options.set('iconImageSize', [35, 40]);
+        objectManager.objects.options.set('iconImageOffset', [-17.5, -40]);
         myMap.geoObjects.add(objectManager);
+
         var addEventLisstener = function (element) {
           element.addEventListener('change', onChangeInput);
         };
