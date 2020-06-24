@@ -97,18 +97,14 @@
           </li>
         </ul>
       </nav>
-      <ul class="pageHeader__userNav userNav">
-        <li class="userNav__item">
-          <a href="#nowhere" class="userNav__btn js-login-open">
-                <span class="userNav__btnIcon">
-                  <svg width="20px" height="22px">
-                    <use xlink:href="#icon-login"></use>
-                  </svg>
-                </span>
-            <span class="userNav__btnText">Войти в Интернет-банк</span>
-          </a>
-        </li>
-      </ul>
+      <a href="#nowhere" class="userNav__btn userNav js-login-open">
+        <span class="userNav__btnIcon">
+          <svg width="20px" height="22px">
+            <use xlink:href="#icon-login"></use>
+          </svg>
+        </span>
+        <span class="userNav__btnText">Войти в Интернет-банк</span>
+      </a>
     </div>
   </div>
 
@@ -391,10 +387,12 @@
                         <div class="calculate js-calculate">
                           <button class="calculate__btn" type="button" aria-label="уменьшить"></button>
                           <div class="calculate__area">
-                            <input class="calculate__input" id="price" type="text" inputmode="numeric" data-min="1200000" data-max="25000000" data-step="100000" value="2 000 000">
+                            <input class="calculate__input" id="price" type="text" inputmode="numeric"
+                                   data-min="1200000" data-max="25000000" data-step="100000" value="2 000 000">
                             <span class="calculate__prefix">рублей</span>
                           </div>
-                          <button class="calculate__btn calculate__btn--plus" type="button" aria-label="увеличить"></button>
+                          <button class="calculate__btn calculate__btn--plus" type="button"
+                                  aria-label="увеличить"></button>
                         </div>
                       </div>
                       <div class="formArea__caption">
@@ -408,7 +406,8 @@
                       <div class="formArea__slot">
                         <div class="calculate calculate--contribution">
                           <div class="calculate__area">
-                            <input class="calculate__input" id="contribution" type="text" inputmode="numeric" data-min="1200000" data-max="25000000" data-step="5" value="200 000">
+                            <input class="calculate__input" id="contribution" type="text" inputmode="numeric"
+                                   data-min="1200000" data-max="25000000" data-step="5" value="200 000">
                             <span class="calculate__prefix">рублей</span>
                           </div>
                         </div>
@@ -431,7 +430,8 @@
                       <div class="formArea__slot">
                         <div class="calculate calculate--term">
                           <div class="calculate__area">
-                            <input class="calculate__input" id="term" type="text" inputmode="numeric" data-min="5" data-max="30" data-prefix="лет" data-step="5" value="5">
+                            <input class="calculate__input" id="term" type="text" inputmode="numeric" data-min="5"
+                                   data-max="30" data-prefix="лет" data-step="5" value="5">
                             <span class="calculate__prefix">лет</span>
                           </div>
                         </div>
@@ -724,7 +724,8 @@
     <div class="form__area formArea formArea--smallLabel js-area-password">
       <label class="formArea__label" for="login-password">Пароль</label>
       <div class="formArea__slot">
-        <input class="formArea__input formArea__input--withBtn" id="login-password" type="password" required autocomplete="on">
+        <input class="formArea__input formArea__input--withBtn" id="login-password" type="password" required
+               autocomplete="on">
         <button class="formArea__visibleBtn js-password-show" type="button">
           <svg width="22px" height="12px">
             <use xlink:href="#icon-eye"></use>

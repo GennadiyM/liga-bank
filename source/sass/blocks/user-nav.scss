@@ -1,20 +1,5 @@
 .userNav {
-  @include list-reset;
-
   width: 203px;
-  display: flex;
-  flex-wrap: wrap;
-
-  @include media(xl) {
-    width: auto;
-  }
-}
-
-.userNav__item {
-  @include style-reset;
-}
-
-.userNav__btn {
   display: flex;
   align-items: center;
   color: $color-text;
@@ -77,6 +62,7 @@
 }
 
 .userNav__btnText {
+  flex-shrink: 0;
   font: inherit;
   font-size: 16px;
   line-height: 19px;
