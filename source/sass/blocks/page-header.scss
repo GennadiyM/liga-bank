@@ -9,15 +9,18 @@
   justify-content: space-between;
   padding-top: 34px;
   padding-bottom: 30px;
+  padding-left: $padding-desktop;
+  padding-right: $padding-desktop;
 
   @include media(xl) {
     padding-top: 27px;
     padding-bottom: 20px;
+    padding-left: $padding-tablet;
+    padding-right: $padding-tablet;
   }
 
   @include media(m) {
-    padding-top: 15px;
-    padding-bottom: 16px;
+    padding: 0;
     background-color: $main-background;
     position: relative;
     z-index: 4;
@@ -29,16 +32,14 @@
   @include style-reset;
 
   display: none;
-  width: 26px;
-  height: 16px;
+  width: 46px;
+  height: 48px;
   background-color: transparent;
   border: none;
   position: relative;
 
   @include media(m) {
     display: block;
-    margin-left: -5px;
-    margin-right: 5px;
   }
 }
 
@@ -47,12 +48,12 @@
   width: 16px;
   height: 2px;
   position: absolute;
-  left: 5px;
+  left: 15px;
   background-color: $color-text;
 }
 
 .pageHeader__toggle span:nth-child(1) {
-  top: 1px;
+  top: 18px;
 }
 
 .pageHeader__toggle span:nth-child(2) {
@@ -61,7 +62,7 @@
 }
 
 .pageHeader__toggle span:nth-child(3) {
-  bottom: 1px;
+  bottom: 18px;
 }
 
 .pageHeader--open .pageHeader__toggle span:nth-child(1) {
