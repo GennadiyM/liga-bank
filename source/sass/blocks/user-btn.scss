@@ -27,20 +27,6 @@
       opacity: 1;
     }
   }
-
-  &::after {
-    @include media(xl) {
-      display: block;
-      width: 200%;
-      height: 200%;
-      content: "";
-      background-color: transparent;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-  }
 }
 
 .userBtn__btnIcon + .userBtn__btnText {

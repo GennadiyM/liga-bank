@@ -4,6 +4,7 @@
 }
 
 .pageHeader__layout {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -13,10 +14,7 @@
   padding-right: $padding-desktop;
 
   @include media(xl) {
-    padding-top: 27px;
-    padding-bottom: 20px;
-    padding-left: $padding-tablet;
-    padding-right: $padding-tablet;
+    padding: 11px 30px 5px 45px;
   }
 
   @include media(m) {
@@ -54,15 +52,18 @@
 
 .pageHeader__toggle span:nth-child(1) {
   top: 18px;
+  transition: top 0.1s ease 0.3s, transform 0.1s ease 0s;
 }
 
 .pageHeader__toggle span:nth-child(2) {
   top: 50%;
   transform: translateY(-50%);
+  transition: opacity 0.2s ease 0.2s;
 }
 
 .pageHeader__toggle span:nth-child(3) {
   bottom: 18px;
+  transition: bottom 0.1s ease 0.3s, transform 0.1s ease 0s;
 }
 
 .pageHeader--open .pageHeader__toggle span:nth-child(1) {
