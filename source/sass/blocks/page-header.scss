@@ -1,6 +1,12 @@
 .pageHeader {
   width: 100%;
   background-color: $color-main-background;
+}
+
+.pageHeader__layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding-top: 34px;
   padding-bottom: 30px;
 
@@ -12,13 +18,10 @@
   @include media(m) {
     padding-top: 15px;
     padding-bottom: 16px;
+    background-color: $main-background;
+    position: relative;
+    z-index: 4;
   }
-}
-
-.pageHeader__layout {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .pageHeader__toggle {
@@ -79,7 +82,33 @@
     height: 17px;
     margin-right: 0;
     transform: translateY(-4px);
+    z-index: 4;
   }
+}
+
+.pageHeader__dropdown {
+  display: none;
+
+  @include media(m) {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    bottom: 100%;
+    width: 100%;
+    min-height: 100vh;
+    background-color: $main-background;
+    z-index: 3;
+    padding-top: 150px;
+    padding-left: 50px;
+    padding-right: 50px;
+    transition: transform $transition-3;
+  }
+}
+
+.pageHeader--open .pageHeader__dropdown {
+  overflow-y: auto;
+  transform: translateY(100%);
 }
 
 .pageHeader__container {
@@ -95,13 +124,7 @@
   }
 }
 
-.pageHeader__mainNav {
-  @include media(m) {
-    display: none;
-  }
-}
-
-.pageHeader__userNav {
+.pageHeader__userBtn {
   transform: translateY(-2px);
   margin-left: 15px;
 }

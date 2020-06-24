@@ -7,6 +7,21 @@
   @include media(xl) {
     width: 415px;
   }
+
+  @include media(m) {
+    display: none;
+  }
+
+  &--dropdown {
+    display: none;
+
+    @include media(m) {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
 }
 
 .mainNav__list {
@@ -15,6 +30,11 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+
+  @include media(m) {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
 }
 
 .mainNav__item {

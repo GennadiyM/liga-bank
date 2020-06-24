@@ -1,9 +1,13 @@
-.userNav {
+.userBtn {
   width: 203px;
   display: flex;
   align-items: center;
   color: $color-text;
   position: relative;
+
+  @include media(xl) {
+    width: auto;
+  }
 
   &:hover,
   &:focus {
@@ -38,11 +42,11 @@
   }
 }
 
-.userNav__btnIcon + .userNav__btnText {
+.userBtn__btnIcon + .userBtn__btnText {
   margin-left: 10px;
 }
 
-.userNav__btnIcon {
+.userBtn__btnIcon {
   color: inherit;
   transition: color $transition-2, opacity $transition-2;
   font-size: 0;
@@ -54,14 +58,14 @@
   }
 }
 
-.userNav__btnIcon svg {
+.userBtn__btnIcon svg {
   @include media(m) {
     width: 14px;
     height: 16px;
   }
 }
 
-.userNav__btnText {
+.userBtn__btnText {
   flex-shrink: 0;
   font: inherit;
   font-size: 16px;
@@ -74,13 +78,13 @@
   }
 }
 
-.userNav__btn:hover .userNav__btnText,
-.userNav__btn:focus .userNav__btnText {
+.userBtn__btn:hover .userBtn__btnText,
+.userBtn__btn:focus .userBtn__btnText {
   color: $color-brand;
   text-decoration: underline;
 }
 
-.userNav__btn:hover .userNav__btnIcon path,
-.userNav__btn:focus .userNav__btnIcon path {
+.userBtn__btn:hover .userBtn__btnIcon path,
+.userBtn__btn:focus .userBtn__btnIcon path {
   fill: $color-brand;
 }

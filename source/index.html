@@ -65,7 +65,7 @@
 </div>
 <header class="page__header pageHeader">
   <div class="page__layout pageHeader__layout">
-    <button class="pageHeader__toggle" type="button">
+    <button class="pageHeader__toggle js-header-toggle" type="button">
       <span></span>
       <span></span>
       <span></span>
@@ -80,34 +80,79 @@
         <img src="img/logo/logo-mob.svg" alt="Лига Банк">
       </picture>
     </a>
-    <div class="pageHeader__container">
-      <nav class="pageHeader__mainNav mainNav">
-        <ul class="mainNav__list">
-          <li class="mainNav__item">
-            <a href="#services">Услуги</a>
-          </li>
-          <li class="mainNav__item">
-            <a href="#credit">Рассчитать кредит</a>
-          </li>
-          <li class="mainNav__item">
-            <a href="#contacts">Контакты</a>
-          </li>
-          <li class="mainNav__item">
-            <a href="#nowhere">Задать вопрос</a>
-          </li>
-        </ul>
-      </nav>
-      <a href="#nowhere" class="userNav__btn userNav js-login-open">
-        <span class="userNav__btnIcon">
+    <nav class="pageHeader__mainNav mainNav">
+      <ul class="mainNav__list">
+        <li class="mainNav__item">
+          <a href="#services">Услуги</a>
+        </li>
+        <li class="mainNav__item">
+          <a href="#credit">Рассчитать кредит</a>
+        </li>
+        <li class="mainNav__item">
+          <a href="#contacts">Контакты</a>
+        </li>
+        <li class="mainNav__item">
+          <a href="#nowhere">Задать вопрос</a>
+        </li>
+      </ul>
+    </nav>
+      <a href="#nowhere" class="pageHeader__userBtn userBtn js-login-open">
+        <span class="userBtn__btnIcon">
           <svg width="20px" height="22px">
             <use xlink:href="#icon-login"></use>
           </svg>
         </span>
-        <span class="userNav__btnText">Войти в Интернет-банк</span>
+        <span class="userBtn__btnText">Войти в Интернет-банк</span>
       </a>
-    </div>
   </div>
-
+  <div class="pageHeader__dropdown">
+    <nav class="pageHeader__mainNav mainNav mainNav--dropdown">
+      <ul class="mainNav__list">
+        <li class="mainNav__item">
+          <a href="#services">Услуги</a>
+        </li>
+        <li class="mainNav__item">
+          <a href="#credit">Рассчитать кредит</a>
+        </li>
+        <li class="mainNav__item">
+          <a href="#contacts">Контакты</a>
+        </li>
+        <li class="mainNav__item">
+          <a href="#nowhere">Задать вопрос</a>
+        </li>
+      </ul>
+    </nav>
+    <ul class="pageHeader__social social social--header">
+      <li class="social__item">
+        <a href="#nowhere" aria-label="Наш фейсбук">
+          <svg width="9px" height="16px">
+            <use xlink:href="#icon-fb"></use>
+          </svg>
+        </a>
+      </li>
+      <li class="social__item">
+        <a href="#nowhere" aria-label="Наш инстаграмм">
+          <svg width="16px" height="16px">
+            <use xlink:href="#icon-inst"></use>
+          </svg>
+        </a>
+      </li>
+      <li class="social__item">
+        <a href="#nowhere" aria-label="Наш твиттер">
+          <svg width="16px" height="13px">
+            <use xlink:href="#icon-tw"></use>
+          </svg>
+        </a>
+      </li>
+      <li class="social__item">
+        <a href="#nowhere" aria-label="Наш ютюб">
+          <svg width="16px" height="13px">
+            <use xlink:href="#icon-youtube"></use>
+          </svg>
+        </a>
+      </li>
+    </ul>
+  </div>
 </header>
 <main class="page__main">
   <section class="promo js-promo" id="promo">
@@ -602,8 +647,7 @@
 </main>
 <footer class="page__footer pageFooter">
   <div class="page__layout pageFooter__layout">
-    <div class="pageFooter__box">
-      <div class="pageFooter__copyright copyright copyright--textInvisible">
+      <div class="pageFooter__box pageFooter__copyright copyright copyright--textInvisible">
         <a class="copyright__logo logo">
           <picture>
             <!-- 1х: 149px; 2x: 149px -->
@@ -616,9 +660,8 @@
         </a>
         <p>150015, г. Москва, ул. Московская, д. 32<br>Генеральная лицензия Банка России №1050 &#64; Лига Банк, 2019</p>
       </div>
-    </div>
     <div class="pageFooter__box pageFooter__box--order-2">
-      <ul class="pageFooter__linkGroup">
+      <ul class="pageFooter__box pageFooter__linkGroup">
         <li class="pageFooter__linkGroupItem">
           <a href="#services">Услуги</a>
         </li>
@@ -675,7 +718,7 @@
       </div>
     </div>
     <div class="pageFooter__box pageFooter__box--order-5">
-      <ul class="social">
+      <ul class="social social--footer">
         <li class="social__item">
           <a href="#nowhere" aria-label="Наш фейсбук">
             <svg width="9px" height="16px">
