@@ -21,6 +21,7 @@
     background-color: $main-background;
     position: relative;
     z-index: 4;
+    justify-content: flex-start;
   }
 }
 
@@ -28,15 +29,16 @@
   @include style-reset;
 
   display: none;
-  width: 16px;
-  height: 10px;
+  width: 26px;
+  height: 16px;
   background-color: transparent;
   border: none;
   position: relative;
 
   @include media(m) {
     display: block;
-    margin-right: 15px;
+    margin-left: -5px;
+    margin-right: 5px;
   }
 }
 
@@ -45,12 +47,12 @@
   width: 16px;
   height: 2px;
   position: absolute;
-  left: 0;
+  left: 5px;
   background-color: $color-text;
 }
 
 .pageHeader__toggle span:nth-child(1) {
-  top: -1px;
+  top: 1px;
 }
 
 .pageHeader__toggle span:nth-child(2) {
@@ -59,7 +61,24 @@
 }
 
 .pageHeader__toggle span:nth-child(3) {
-  bottom: -1px;
+  bottom: 1px;
+}
+
+.pageHeader--open .pageHeader__toggle span:nth-child(1) {
+  top: 7px;
+  transform: rotate(45deg);
+  transition: top 0.1s ease 0s, transform 0.1s ease 0.3s;
+}
+
+.pageHeader--open .pageHeader__toggle span:nth-child(2) {
+  opacity: 0;
+  transition: opacity 0.2s ease 0.2s;
+}
+
+.pageHeader--open .pageHeader__toggle span:nth-child(3) {
+  bottom: 7px;
+  transform: rotate(-45deg);
+  transition: bottom 0.1s ease 0s, transform 0.1s ease 0.3s;
 }
 
 .pageHeader__logo {
@@ -74,13 +93,13 @@
     width: 133px;
     height: 22px;
     margin-right: 55px;
-    transform: translateY(-6px);
+    transform: translateY(-5px);
   }
 
   @include media(m) {
     width: 113px;
     height: 17px;
-    margin-right: 0;
+    margin-right: auto;
     transform: translateY(-4px);
     z-index: 4;
   }
@@ -111,20 +130,15 @@
   transform: translateY(100%);
 }
 
-.pageHeader__container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-grow: 1;
-
-  @include media(m) {
-    flex-grow: 0;
-    justify-content: flex-end;
-    margin-left: auto;
-  }
+.pageHeader__mainNav {
+  margin-right: auto;
 }
 
 .pageHeader__userBtn {
   transform: translateY(-2px);
   margin-left: 15px;
+
+  @include media(m) {
+    transform: none;
+  }
 }
