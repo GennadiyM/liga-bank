@@ -119,9 +119,10 @@
     min-height: 100vh;
     background-color: $main-background;
     z-index: 3;
-    padding-top: 150px;
+    padding-top: 50px;
     padding-left: 50px;
     padding-right: 50px;
+    padding-bottom: 50px;
     transition: transform $transition-3;
   }
 }
@@ -142,4 +143,8 @@
   @include media(m) {
     transform: none;
   }
+}
+
+.pageHeader__dropdownNav {
+  margin-top: auto;
 }
