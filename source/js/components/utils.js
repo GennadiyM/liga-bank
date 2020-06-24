@@ -4,6 +4,6 @@ var utils = function () {
   };
 
   window.body = document.querySelector(Selector.BODY);
-}
+};
 
 export default utils;
