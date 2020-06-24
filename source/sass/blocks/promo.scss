@@ -2,6 +2,9 @@
   width: 100%;
   max-width: $max-width;
   margin: 0 auto;
+}
+
+.promo__swiper-wrapper {
   background-color: $color-brand;
 }
 
@@ -40,7 +43,7 @@
   }
 
   @include media(m) {
-    width: 100%;
+    width: 205px;
     margin-left: 0;
   }
 }

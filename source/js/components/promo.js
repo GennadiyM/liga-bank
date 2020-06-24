@@ -28,6 +28,7 @@ var promo = function () {
     simulateTouch: false,
     autoplay: {
       delay: 4000,
+      speed: 800,
       disableOnInteraction: false,
     },
     pagination: {
