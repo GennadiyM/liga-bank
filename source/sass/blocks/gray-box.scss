@@ -55,7 +55,7 @@
 
   @include media(xl) {
     font-size: 18px;
-    margin-bottom: 24px;
+    margin-bottom: 27px;
   }
 
   @include media(m) {
@@ -68,6 +68,10 @@
   width: 100%;
   margin-top: -26px;
   margin-bottom: 34px;
+
+  @include media(m) {
+    margin-bottom: 34px;
+  }
 
   @include media(m) {
     margin-top: -13px;

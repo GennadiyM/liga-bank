@@ -49,7 +49,7 @@
       margin-top: 56px;
     }
 
-    @include media(xl) {
+    @include media(m) {
       margin-top: 50px;
     }
   }
@@ -81,7 +81,7 @@
     margin-top: 17px;
   }
 
-  @include media(xl) {
+  @include media(m) {
     margin-top: 15px;
   }
 }
