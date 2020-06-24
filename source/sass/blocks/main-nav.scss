@@ -77,6 +77,7 @@
     @include media(xl) {
       color: $color-text;
       transition: none;
+      text-decoration: none;
     }
   }
 
@@ -93,6 +94,7 @@
     line-height: 16px;
   }
 }
+
 .mainNav--dropdown a {
   width: 100%;
   padding-left: 0;
