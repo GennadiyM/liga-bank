@@ -1,5 +1,13 @@
 import ymaps from 'ymaps';
 
+var MEDIA_QUERY = '(max-width: 767px)';
+var ICON_LOCATION = 'img/map/location.svg';
+var ICON_DESKTOP_SIZE = [35, 40];
+var ICON_DESKTOP_OFFSET = [-17.5, -40];
+var ICON_MOBILE_SIZE = [29, 33];
+var ICON_MOBILE_OFFSET = [-14.5, -33];
+
+
 var contacts = function () {
   var Selector = {
     CONTACTS: '.js-contacts',
@@ -81,6 +89,7 @@ var contacts = function () {
 
   var map = blocContacts.querySelector(Selector.MAP);
   var inputs = blocContacts.querySelectorAll(Selector.INPUT);
+  var mediaQueryList = window.matchMedia(MEDIA_QUERY);
 
   var getObjectManager = function (mapPointList) {
     var objectManager = {
@@ -106,6 +115,16 @@ var contacts = function () {
   ymaps
       .load('https://api-maps.yandex.ru/2.1/?apikey=cad0cd31-c5d4-49f9-899d-17e864dc86e4&lang=ru_RU')
       .then(function (maps) {
+        var setIconPoint = function () {
+          if (window.matchMedia(MEDIA_QUERY).matches) {
+            objectManager.objects.options.set('iconImageSize', ICON_MOBILE_SIZE);
+            objectManager.objects.options.set('iconImageOffset', ICON_MOBILE_OFFSET);
+          } else {
+            objectManager.objects.options.set('iconImageSize', ICON_DESKTOP_SIZE);
+            objectManager.objects.options.set('iconImageOffset', ICON_DESKTOP_OFFSET);
+          }
+        };
+
         var myMap = new maps.Map(map, {
           center: [55.76, 37.64],
           zoom: 4,
@@ -113,9 +132,8 @@ var contacts = function () {
 
         var objectManager = new maps.ObjectManager();
         objectManager.objects.options.set('iconLayout', 'default#image');
-        objectManager.objects.options.set('iconImageHref', 'img/map/location.svg');
-        objectManager.objects.options.set('iconImageSize', [35, 40]);
-        objectManager.objects.options.set('iconImageOffset', [-17.5, -40]);
+        objectManager.objects.options.set('iconImageHref', ICON_LOCATION);
+        setIconPoint();
         myMap.geoObjects.add(objectManager);
 
         var addEventLisstener = function (element) {
@@ -139,6 +157,13 @@ var contacts = function () {
             objectManager.add(getObjectManager(countryMap[input.value]));
           }
         });
+
+
+        var onWindowResize = function () {
+          setIconPoint();
+        };
+
+        mediaQueryList.addListener(onWindowResize);
       });
 };
 
