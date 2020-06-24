@@ -1,14 +1,13 @@
 import ymaps from 'ymaps';
 
-var MEDIA_QUERY = '(max-width: 767px)';
-var ICON_LOCATION = 'img/map/location.svg';
-var ICON_DESKTOP_SIZE = [35, 40];
-var ICON_DESKTOP_OFFSET = [-17.5, -40];
-var ICON_MOBILE_SIZE = [29, 33];
-var ICON_MOBILE_OFFSET = [-14.5, -33];
-
-
 var contacts = function () {
+  var MEDIA_QUERY = '(max-width: 767px)';
+  var ICON_LOCATION = 'img/map/location.svg';
+  var ICON_DESKTOP_SIZE = [35, 40];
+  var ICON_DESKTOP_OFFSET = [-17.5, -40];
+  var ICON_MOBILE_SIZE = [29, 33];
+  var ICON_MOBILE_OFFSET = [-14.5, -33];
+
   var Selector = {
     CONTACTS: '.js-contacts',
     MAP: '.contacts__map',
