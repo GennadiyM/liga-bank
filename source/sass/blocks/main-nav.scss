@@ -1,11 +1,11 @@
 .mainNav {
-  width: 479px;
+  width: 640px;
   display: flex;
   align-items: flex-end;
   margin-top: -5px;
 
   @include media(xl) {
-    width: 415px;
+    width: 425px;
   }
 
   @include media(m) {
