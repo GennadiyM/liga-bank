@@ -371,7 +371,7 @@
   <div class="page__layout">
     <section class="page__block credit js-credit" id="credit">
       <h2 class="page__blockTitle">Кредитный калькулятор</h2>
-      <div class="page__blocMain credit__main">
+      <div class="credit__main">
         <div class="credit__container">
           <div class="credit__box">
             <div class="credit__element element element--top">
@@ -379,13 +379,13 @@
               <div class="element__slot">
                 <select class="select js-select" name="Выберите цель кредита">
                   <option label="Выберите цель кредита"></option>
-                  <option value="mortgage" data-name-calc="Стоимость недвижимости" data-name-option="Использовать материнский капитал" data-name-result="Сумма ипотеки" data-name-form="Ипотека" data-name-info="ипотечные кредиты" data-target-form="Сумма недвижимости">Ипотечное кредитование</option>
-                  <option value="car" data-name-calc="Стоимость автомобиля" data-name-option="Использовать материнский капитал" data-name-result="Сумма автокредита" data-name-form="Автокредит" data-name-info="автокредиты" data-target-form="Стоимость автомобиля">Автомобильное кредтование</option>
-                  <option value="consumer" data-name-calc="Сумма потребительского кредита" data-name-option="Участник зарплатного проекта нашего банка" data-name-result="Сумма кредита" data-name-form="Потребительский кредит" data-target-form="Сумма кредита">Потребительский кредит</option>
+                  <option value="mortgage" data-min="1200000" data-max="25000000" data-min-initial="10" data-min-term="5" data-max-term="30" data-step-term="1" data-min-rate="8.5" data-max-rate="9.5" data-prefix="год,года,лет" data-name-calc="Стоимость недвижимости" data-name-result="Сумма ипотеки" data-name-form="Ипотека" data-name-info="ипотечные кредиты" data-target-form="Сумма недвижимости">Ипотечное кредитование</option>
+                  <option value="car" data-min="500000" data-max="5000000" data-min-initial="20" data-min-term="1" data-max-term="5" data-step-term="1" data-min-rate="8.5" data-max-rate="9.5" data-rate-summer="3.5" data-prefix="год,года,лет" data-name-calc="Стоимость автомобиля" data-name-result="Сумма автокредита" data-name-form="Автокредит" data-name-info="автокредиты" data-target-form="Стоимость автомобиля">Автомобильное кредтование</option>
+                  <option value="consumer" data-min="50000" data-max="3000000" data-min-term="1" data-max-term="7" data-step-term="1" data-prefix="год,года,лет" data-name-calc="Сумма потребительского кредита" data-name-result="Сумма кредита" data-name-form="Потребительский кредит" data-target-form="Сумма кредита">Потребительский кредит</option>
                 </select>
               </div>
             </div>
-            <div class="credit__element credit__element--invis">
+            <div class="credit__element credit__element--calc">
               <div class="element">
                 <p class="element__label">Шаг 2. Введите параметры кредита</p>
                 <div class="element__slot">
@@ -404,11 +404,11 @@
                           </div>
                         </div>
                         <div class="formArea__caption">
-                          <p>От 1 200 000 до 25 000 000 рублей</p>
+                          <p>От <span class="js-min">1 200 000</span> до <span class="js-max">25 000 000</span> рублей</p>
                         </div>
                       </div>
                     </li>
-                    <li class="element__listItem js-initial-fee">
+                    <li class="element__listItem credit__initial js-initial-fee">
                       <div class="formArea js-range-calculate">
                         <label class="formArea__label" for="contribution">Первоначальный взнос</label>
                         <div class="formArea__slot">
@@ -425,7 +425,7 @@
                               <button class="range__btn" type="button" aria-label="ползунок"></button>
                             </div>
                             <div class="range__caption">
-                              <p class="range__captionLeft">10%</p>
+                              <p class="range__captionLeft js-min-initial">10%</p>
                             </div>
                           </div>
                         </div>
@@ -438,7 +438,7 @@
                           <div class="calculate calculate--term">
                             <div class="calculate__area">
                               <input class="calculate__input" id="term" type="text" inputmode="numeric" value="5">
-                              <span class="calculate__prefix">лет</span>
+                              <span class="calculate__prefix js-input-prefix">лет</span>
                             </div>
                           </div>
                         </div>
@@ -450,8 +450,8 @@
                               <button class="range__btn" type="button" aria-label="ползунок"></button>
                             </div>
                             <div class="range__caption">
-                              <p class="range__captionLeft">5 лет</p>
-                              <p class="range__captionRight">30 лет</p>
+                              <p class="range__captionLeft js-min-term">5 лет</p>
+                              <p class="range__captionRight js-max-term">30 лет</p>
                             </div>
                           </div>
                         </div>
@@ -461,15 +461,34 @@
                 </div>
               </div>
             </div>
-            <div class="credit__option">
-              <label class="option js-option">
-                <input class="option__input" type="checkbox" checked="">
+            <div class="credit__option credit__option--mortgage">
+              <label class="option js-option-mortgage">
+                <input class="option__input" type="checkbox" data-income="45" value="4700000" checked="">
                 <span class="option__element"></span>
                 <span class="option__label">Использовать материнский капитал</span>
               </label>
             </div>
+            <div class="credit__option credit__option--car">
+              <label class="option js-option-casсo">
+                <input class="option__input" type="checkbox" data-income="45" value="8.5" checked="">
+                <span class="option__element"></span>
+                <span class="option__label">Оформить КАСКО в нашем банке</span>
+              </label>
+              <label class="option js-option-health">
+                <input class="option__input" type="checkbox" data-income="45" value="8.5" checked="">
+                <span class="option__element"></span>
+                <span class="option__label">Оформить Страхование жизни в нашем банке</span>
+              </label>
+            </div>
+            <div class="credit__option credit__option--consumer">
+              <label class="option js-option-consumer">
+                <input class="option__input" type="checkbox" checked="">
+                <span class="option__element"></span>
+                <span class="option__label">Участник зарплатного проекта нашего банка</span>
+              </label>
+            </div>
           </div>
-          <div class="credit__box credit__box--right grayBox">
+          <div class="credit__box credit__box--offer grayBox">
             <div class="credit__boxContent">
               <p class="grayBox__title">Наше предложение</p>
               <div class="grayBox__grid">
@@ -502,7 +521,7 @@
             </div>
           </div>
         </div>
-        <div class="credit__box credit__box--center grayBox grayBox--xs">
+        <div class="credit__box credit__box--form grayBox grayBox--xs">
           <p class="grayBox__title">Шаг 3. Оформление заявки</p>
           <form class="grayBox__form form" action="#" name="#" method="post">
             <ul class="form__list">
@@ -584,7 +603,7 @@
     </section>
     <section class="page__block page__block--contacts contacts js-contacts" id="contacts">
       <h2 class="page__blockTitle">Отделения Лига Банка</h2>
-      <div class="page__blocMain contacts__main">
+      <div class="contacts__main">
         <div class="contacts__top">
           <ul class="contacts__optionGroup optionGroup">
             <li class="optionGroup__item">

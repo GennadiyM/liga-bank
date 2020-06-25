@@ -2,23 +2,31 @@ import $ from 'jquery';
 import 'select2';
 
 var select = function () {
-  var CONSUMER_CREDIT = 'consumer';
+  var CLASS_CREDIT = 'credit--';
 
   var Selector = {
     SELECT_INPUT: '.js-select',
     ELEMENT_SLOT: '.element__slot',
     NAME_CALC: '.js-name-calc',
-    OPTION: '.js-option .option__label',
     NAME_RESULT: '.js-name-result',
     NAME_FORM: '.js-name-form',
     TARGET_FORM: '.js-target-form',
     NAME_INFO: '.js-name-info',
-    INITIAL_FREE: '.js-initial-fee'
+    MIN: '.js-min',
+    MAX: '.js-min',
+    MIN_TERM: '.js-min-term',
+    MAX_TERM: '.js-max-term',
+    MIN_INITIAL: '.js-min-initial',
   };
 
   var Class = {
     CREDIT_OPEN: 'credit--open',
-    FORM_LIST_INVISIBVLE: 'form__listItem--invisible',
+  };
+
+  var ClassCredit = {
+    MORTGAGE: 'credit--mortgage',
+    CAR: 'credit--car',
+    CONSUMER: 'credit--consumer',
   };
 
   var selectInput = document.querySelector(Selector.SELECT_INPUT);
@@ -28,12 +36,10 @@ var select = function () {
   }
 
   var nameCalc = window.credit.querySelector(Selector.NAME_CALC);
-  var option = window.credit.querySelector(Selector.OPTION);
   var nameResult = window.credit.querySelector(Selector.NAME_RESULT);
   var nameForm = window.credit.querySelector(Selector.NAME_FORM);
   var targetForm = window.credit.querySelector(Selector.TARGET_FORM);
   var nameInfo = window.credit.querySelector(Selector.NAME_INFO);
-  var areaInitialFree = window.credit.querySelector(Selector.INITIAL_FREE);
   var selectSlot = selectInput.closest(Selector.ELEMENT_SLOT);
 
   $(selectInput).select2({
@@ -49,26 +55,30 @@ var select = function () {
 
     var calcParameters = {
       nameCalc: checkedOption.dataset.nameCalc,
-      nameOption: checkedOption.dataset.nameOption,
       nameResult: checkedOption.dataset.nameResult,
       nameForm: checkedOption.dataset.nameForm,
       targetForm: checkedOption.dataset.targetForm,
-      nameInfo: checkedOption.dataset.nameInfo,
+      min: checkedOption.dataset.min,
+      max: checkedOption.dataset.max,
+      minTerm: checkedOption.dataset.minTerm,
+      maxTerm: checkedOption.dataset.maxTerm,
+      minInitial: checkedOption.dataset.minInitial,
+      stepTerm: checkedOption.dataset.stepTerm,
+      minRate: checkedOption.dataset.minRate,
+      maxRate: checkedOption.dataset.maxRate,
+      prefix: checkedOption.dataset.prefix,
     };
 
-    if (selectInput.value === CONSUMER_CREDIT) {
-      areaInitialFree.classList.add(Class.FORM_LIST_INVISIBVLE);
-      checkedOption.dataset.nameInfo = false;
-    } else {
-      areaInitialFree.classList.remove(Class.FORM_LIST_INVISIBVLE);
-      calcParameters.nameInfo = checkedOption.dataset.nameInfo;
-    }
+    console.log(calcParameters);
 
     window.credit.classList.add(Class.CREDIT_OPEN);
+    window.credit.classList.remove(ClassCredit.MORTGAGE);
+    window.credit.classList.remove(ClassCredit.CAR);
+    window.credit.classList.remove(ClassCredit.CONSUMER);
+    window.credit.classList.add(CLASS_CREDIT + selectInput.value);
     window.credit.dataset.target = selectInput.value;
 
     nameCalc.innerHTML = calcParameters.nameCalc;
-    option.innerHTML = calcParameters.nameOption;
     nameResult.innerHTML = calcParameters.nameResult;
     nameInfo.innerHTML = calcParameters.nameInfo;
     targetForm.innerHTML = calcParameters.targetForm;
