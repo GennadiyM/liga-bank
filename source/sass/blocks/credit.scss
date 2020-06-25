@@ -26,6 +26,7 @@
   margin-right: 30px;
 
   &--right {
+    display: none;
     margin-top: 5px;
     margin-right: 0;
     margin-left: auto;
@@ -41,6 +42,7 @@
   }
 
   &--center {
+    display: none;
     margin-top: 67px;
     margin-left: auto;
     margin-right: auto;
@@ -62,6 +64,18 @@
   }
 }
 
+.credit--open .credit__box {
+  display: block;
+}
+
+.credit__element--invis {
+  display: none;
+}
+
+.credit--open .credit__element--invis {
+  display: block;
+}
+
 .credit__element + .credit__element {
   margin-top: 33px;
 
@@ -75,6 +89,7 @@
 }
 
 .credit__option {
+  display: none;
   margin-top: 22px;
 
   @include media(xl) {
@@ -84,4 +99,12 @@
   @include media(m) {
     margin-top: 15px;
   }
+}
+
+.credit__boxInfo {
+  display: none;
+}
+
+.credit--open .credit__option {
+  display: block;
 }
