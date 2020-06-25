@@ -2,6 +2,8 @@ import $ from 'jquery';
 import 'select2';
 
 var select = function () {
+  var CONSUMER_CREDIT = 'consumer';
+
   var Selector = {
     SELECT_INPUT: '.js-select',
     ELEMENT_SLOT: '.element__slot',
@@ -11,10 +13,12 @@ var select = function () {
     NAME_FORM: '.js-name-form',
     TARGET_FORM: '.js-target-form',
     NAME_INFO: '.js-name-info',
+    INITIAL_FREE: '.js-initial-fee'
   };
 
   var Class = {
     CREDIT_OPEN: 'credit--open',
+    FORM_LIST_INVISIBVLE: 'form__listItem--invisible',
   };
 
   var selectInput = document.querySelector(Selector.SELECT_INPUT);
@@ -29,7 +33,7 @@ var select = function () {
   var nameForm = window.credit.querySelector(Selector.NAME_FORM);
   var targetForm = window.credit.querySelector(Selector.TARGET_FORM);
   var nameInfo = window.credit.querySelector(Selector.NAME_INFO);
-
+  var areaInitialFree = window.credit.querySelector(Selector.INITIAL_FREE);
   var selectSlot = selectInput.closest(Selector.ELEMENT_SLOT);
 
   $(selectInput).select2({
@@ -51,6 +55,14 @@ var select = function () {
       targetForm: checkedOption.dataset.targetForm,
       nameInfo: checkedOption.dataset.nameInfo,
     };
+
+    if (selectInput.value === CONSUMER_CREDIT) {
+      areaInitialFree.classList.add(Class.FORM_LIST_INVISIBVLE);
+      checkedOption.dataset.nameInfo = false;
+    } else {
+      areaInitialFree.classList.remove(Class.FORM_LIST_INVISIBVLE);
+      calcParameters.nameInfo = checkedOption.dataset.nameInfo;
+    }
 
     window.credit.classList.add(Class.CREDIT_OPEN);
     window.credit.dataset.target = selectInput.value;
