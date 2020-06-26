@@ -14,4 +14,17 @@ var utils = function () {
   window.optionHealth = document.querySelector(Selector.OPTION_HEALTH);
 };
 
+var createElement = function (template) {
+  var newElement = document.createElement('div');
+  newElement.innerHTML = template;
+
+  return newElement.firstChild;
+};
+
+var getStringOfNumb = function (numb) {
+  var stringOfNum = numb.toString();
+  return stringOfNum.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, '$1' + ' ');
+};
+
+export {createElement, getStringOfNumb};
 export default utils;
