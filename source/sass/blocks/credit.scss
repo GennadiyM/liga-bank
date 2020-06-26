@@ -26,7 +26,6 @@
   margin-right: 30px;
 
   &--offer {
-    display: none;
     margin-top: 5px;
     margin-right: 0;
     margin-left: auto;
@@ -42,7 +41,6 @@
   }
 
   &--form {
-    display: none;
     margin-top: 67px;
     margin-left: auto;
     margin-right: auto;
@@ -64,30 +62,6 @@
   }
 }
 
-.credit--open .credit__box {
-  display: block;
-}
-
-.credit__element--calc {
-  display: none;
-}
-
-.credit--mortgage .credit__element--calc {
-  display: block;
-}
-
-.credit--consumer .credit__element--calc {
-  display: block;
-}
-
-.credit--car .credit__element--calc {
-  display: block;
-}
-
-.credit--consumer .credit__initial {
-  display: none;
-}
-
 .credit__element + .credit__element {
   margin-top: 33px;
 
@@ -101,7 +75,6 @@
 }
 
 .credit__option {
-  display: none;
   margin-top: 22px;
 
   @include media(xl) {
@@ -114,17 +87,5 @@
 }
 
 .credit__boxInfo {
-  display: none;
-}
-
-.credit--mortgage .credit__option--mortgage {
-  display: block;
-}
-
-.credit--car .credit__option--car {
-  display: block;
-}
-
-.credit--consumer .credit__option--consumer {
   display: block;
 }

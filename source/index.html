@@ -407,273 +407,76 @@
   <div class="page__layout">
     <section class="page__block credit js-credit" id="credit">
       <h2 class="page__blockTitle">Кредитный калькулятор</h2>
-      <div class="credit__main">
-        <div class="credit__container">
-          <div class="credit__box">
+      <div class="credit__main js-credit-form-container">
+        <div class="credit__container js-credit-container">
+          <div class="credit__box js-main-calc-container">
             <div class="credit__element element element--top">
               <p class="element__label">Шаг 1. Цель кредита</p>
               <div class="element__slot">
                 <select class="select js-select" name="Выберите цель кредита">
                   <option label="Выберите цель кредита"></option>
                   <option value="mortgage"
+                          data-start-value="2000000"
                           data-min="1200000"
                           data-max="25000000"
-                          data-min-initial="10"
+                          data-step="100000"
+                          data-start-percent="10"
+                          data-rate-min="8.50"
+                          data-rate-max="9.40"
+                          data-rate-threshold="15"
+                          data-
+                          data-value-error="500000"
+                          data-option-name="Материнский капитал",
+                          data-option-value="470000",
+                          data-option-status="true",
+                          data-calc-name="Стоимость недвижимости"
+                          data-result-name="Сумма ипотеки"
+                          data-info-name="ипотечные кредиты"
+                          data-total-name="Ипотека"
+                          data-total-summer-name="Сумма недвижимости"
                           data-min-term="5"
                           data-max-term="30"
                           data-step-term="1"
-                          data-min-rate="8.5"
-                          data-max-rate="9.5"
-                          data-prefix="год,года,лет"
-                          data-name-calc="Стоимость недвижимости"
-                          data-name-result="Сумма ипотеки"
-                          data-name-form="Ипотека"
-                          data-name-info="ипотечные кредиты"
-                          data-target-form="Сумма недвижимости">Ипотечное кредитование</option>
+                          data-prefix-term="год, года, лет">Ипотечное кредитование</option>
                   <option value="car"
                           data-min="500000"
                           data-max="5000000"
+                          data-step="500000"
                           data-min-initial="20"
+                          data-value-error="200000"
+                          data-rate-min="15"
+                          data-rate-max="16"
+                          data-rate-threshold="2000000"
+                          data-calc-name="Стоимость автомобиля"
+                          data-result-name="Сумма автокредита"
+                          data-info-name="автокредиты"
+                          data-total-name="Автокредит"
+                          data-total-summer-name="Стоимость автомобиля"
                           data-min-term="1"
                           data-max-term="5"
                           data-step-term="1"
-                          data-min-rate="8.5"
-                          data-max-rate="9.5"
-                          data-rate-summer="3.5"
-                          data-prefix="год,года,лет"
-                          data-name-calc="Стоимость автомобиля"
-                          data-name-result="Сумма автокредита"
-                          data-name-form="Автокредит"
-                          data-name-info="автокредиты"
-                          data-target-form="Стоимость автомобиля">Автомобильное кредтование</option>
+                          data-prefix-term="год, года, лет">Автомобильное кредтование</option>
                   <option value="consumer"
                           data-min="50000"
                           data-max="3000000"
+                          data-step="50000"
+                          data-rate-min="9.5"
+                          data-rate-mid="12.5"
+                          data-rate-max="15"
+                          data-rate-threshold="7500000"
+                          data-rate-threshold-max="2000000"
+                          data-calc-name="Сумма потребительского кредита"
+                          data-result-name="Сумма кредита"
+                          data-total-name="Потребительский кредит"
+                          data-total-summer-name="Сумма кредита"
                           data-min-term="1"
                           data-max-term="7"
                           data-step-term="1"
-                          data-prefix="год,года,лет"
-                          data-name-calc="Сумма потребительского кредита"
-                          data-name-result="Сумма кредита"
-                          data-name-form="Потребительский кредит"
-                          data-target-form="Сумма кредита">Потребительский кредит</option>
+                          data-prefix-term="год, года, лет">Потребительский кредит</option>
                 </select>
               </div>
             </div>
-            <div class="credit__element credit__element--calc">
-              <div class="element">
-                <p class="element__label">Шаг 2. Введите параметры кредита</p>
-                <div class="element__slot">
-                  <ul class="element__list">
-                    <li class="element__listItem">
-                      <div class="formArea formArea--calc">
-                        <label class="formArea__label js-name-calc" for="price">Стоимость недвижимости</label>
-                        <div class="formArea__slot">
-                          <div class="calculate js-calculate">
-                            <button class="calculate__btn" type="button" aria-label="уменьшить"></button>
-                            <div class="calculate__area">
-                              <input class="calculate__input" id="price" type="text" inputmode="numeric" value="2 000 000">
-                              <span class="calculate__prefix">рублей</span>
-                            </div>
-                            <button class="calculate__btn calculate__btn--plus" type="button"
-                                    aria-label="увеличить"></button>
-                          </div>
-                        </div>
-                        <div class="formArea__caption">
-                          <p>От <span class="js-min">1 200 000</span> до <span class="js-max">25 000 000</span> рублей</p>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="element__listItem credit__initial js-initial-fee">
-                      <div class="formArea js-range-calculate">
-                        <label class="formArea__label" for="contribution">Первоначальный взнос</label>
-                        <div class="formArea__slot">
-                          <div class="calculate calculate--contribution">
-                            <div class="calculate__area">
-                              <input class="calculate__input" id="contribution" type="text" inputmode="numeric" value="200 000">
-                              <span class="calculate__prefix">рублей</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="formArea__caption">
-                          <div class="range">
-                            <div class="range__bar">
-                              <button class="range__btn" type="button" aria-label="ползунок"></button>
-                            </div>
-                            <div class="range__caption">
-                              <p class="range__captionLeft js-min-initial">10%</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="element__listItem">
-                      <div class="formArea formArea--pixel-perfect js-range-calculate">
-                        <label class="formArea__label" for="term">Срок кредитования</label>
-                        <div class="formArea__slot">
-                          <div class="calculate calculate--term">
-                            <div class="calculate__area">
-                              <input class="calculate__input" id="term" type="text" inputmode="numeric" value="5">
-                              <span class="calculate__prefix js-input-prefix">лет</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="formArea__slot">
-                        </div>
-                        <div class="formArea__caption">
-                          <div class="range">
-                            <div class="range__bar">
-                              <button class="range__btn" type="button" aria-label="ползунок"></button>
-                            </div>
-                            <div class="range__caption">
-                              <p class="range__captionLeft js-min-term">5 лет</p>
-                              <p class="range__captionRight js-max-term">30 лет</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="credit__option credit__option--mortgage">
-              <label class="option js-option-mortgage">
-                <input class="option__input" type="checkbox" data-income="45" value="4700000" checked>
-                <span class="option__element"></span>
-                <span class="option__label">Использовать материнский капитал</span>
-              </label>
-            </div>
-            <div class="credit__option credit__option--car">
-              <label class="option js-option-casсo">
-                <input class="option__input" type="checkbox" data-income="45" value="8.5" checked>
-                <span class="option__element"></span>
-                <span class="option__label">Оформить КАСКО в нашем банке</span>
-              </label>
-              <label class="option js-option-health">
-                <input class="option__input" type="checkbox" data-income="45" value="8.5" checked>
-                <span class="option__element"></span>
-                <span class="option__label">Оформить Страхование жизни в нашем банке</span>
-              </label>
-            </div>
-            <div class="credit__option credit__option--consumer">
-              <label class="option js-option-consumer">
-                <input class="option__input" type="checkbox" checked>
-                <span class="option__element"></span>
-                <span class="option__label">Участник зарплатного проекта нашего банка</span>
-              </label>
-            </div>
           </div>
-          <div class="credit__box credit__box--offer grayBox">
-            <div class="credit__boxContent">
-              <p class="grayBox__title">Наше предложение</p>
-              <div class="grayBox__grid">
-                <div class="grayBox__row">
-                  <div class="grayBox__cell">
-                    <p class="grayBox__value">1 330 000 рублей</p>
-                    <p class="grayBox__caption js-name-result">Сумма ипотеки</p>
-                  </div>
-                  <div class="grayBox__cell grayBox__cell--small">
-                    <p class="grayBox__value">9,40%</p>
-                    <p class="grayBox__caption">Процентная ставка</p>
-                  </div>
-                </div>
-                <div class="grayBox__row">
-                  <div class="grayBox__cell">
-                    <p class="grayBox__value">27 868 рублей</p>
-                    <p class="grayBox__caption">Ежемесячный платеж</p>
-                  </div>
-                  <div class="grayBox__cell grayBox__cell--small">
-                    <p class="grayBox__value">61 929 рублей</p>
-                    <p class="grayBox__caption">Необходимый доход</p>
-                  </div>
-                </div>
-              </div>
-              <div class="grayBox__btn btn btn--w100">Оформить заявку</div>
-            </div>
-            <div class="credit__boxInfo">
-              <p class="grayBox__title">Наш банк не выдаёт <span class="js-name-info">ипотечные кредиты</span> меньше 200 000 рублей.</p>
-              <p>Попробуйте использовать другие параметры для расчёта.</p>
-            </div>
-          </div>
-        </div>
-        <div class="credit__box credit__box--form grayBox grayBox--xs">
-          <p class="grayBox__title">Шаг 3. Оформление заявки</p>
-          <form class="grayBox__form form" action="#" name="#" method="post">
-            <ul class="form__list">
-              <li class="form__listItem">
-                <label class="formArea formArea--horizontal">
-                  <span class="formArea__label">Номер заявки</span>
-                  <span class="formArea__slot">
-                    <input class="formArea__input" type="text" value="№ 0010" disabled>
-                  </span>
-                </label>
-              </li>
-              <li class="form__listItem">
-                <label class="formArea formArea--horizontal">
-                  <span class="formArea__label">Цель кредита</span>
-                  <span class="formArea__slot">
-                    <input class="formArea__input js-name-form" type="text" value="Ипотека" disabled>
-                  </span>
-                </label>
-              </li>
-              <li class="form__listItem">
-                <label class="formArea formArea--horizontal">
-                  <span class="formArea__label js-target-form">Стоимость недвижимости</span>
-                  <span class="formArea__slot">
-                    <input class="formArea__input" type="text" value="2 000 000 рублей" disabled>
-                  </span>
-                </label>
-              </li>
-              <li class="form__listItem">
-                <label class="formArea formArea--horizontal">
-                  <span class="formArea__label">Первоначальный взнос</span>
-                  <span class="formArea__slot">
-                    <input class="formArea__input" type="text" value="200 000 рублей" disabled>
-                  </span>
-                </label>
-              </li>
-              <li class="form__listItem">
-                <label class="formArea formArea--horizontal">
-                  <span class="formArea__label">Срок кредитования</span>
-                  <span class="formArea__slot">
-                    <input class="formArea__input" type="text" value="5 лет" disabled>
-                  </span>
-                </label>
-              </li>
-            </ul>
-            <div class="form__grid">
-              <div class="form__row">
-                <div class="form__cell">
-                  <label class="formArea formArea--withoutLabel">
-                    <span class="formArea__label">ФИО</span>
-                    <span class="formArea__slot">
-                      <input class="formArea__input" type="text" placeholder="ФИО" required>
-                    </span>
-                  </label>
-                </div>
-              </div>
-              <div class="form__row">
-                <div class="form__cell form__cell--w50">
-                  <label class="formArea formArea--withoutLabel">
-                    <span class="formArea__label">Телефон</span>
-                    <span class="formArea__slot">
-                      <input class="formArea__input js-phone" type="text" placeholder="Телефон" required>
-                    </span>
-                  </label>
-                </div>
-                <div class="form__cell form__cell--w50">
-                  <label class="formArea formArea--withoutLabel">
-                    <span class="formArea__label">E-mail</span>
-                    <span class="formArea__slot">
-                      <input class="formArea__input" type="email" placeholder="E-mail" required>
-                    </span>
-                  </label>
-                </div>
-              </div>
-            </div>
-            <button class="form__btn btn btn--form">Отправить</button>
-          </form>
         </div>
       </div>
     </section>
@@ -851,5 +654,148 @@
 <div class="overlay js-overlay"></div>
 <script src="js/vendor.js"></script>
 <script src="js/app.js"></script>
+
+<template class="js-option-html">
+  <label class="option js-option-mortgage">
+    <input class="option__input" type="checkbox" data-income="45" value="4700000" checked>
+    <span class="option__element"></span>
+    <span class="option__label">Использовать материнский капитал</span>
+  </label>
+</template>
+
+<template class="js-calc-html">
+  <li class="element__listItem">
+    <div class="formArea js-calculate">
+      <label class="formArea__label" for="price">Стоимость недвижимости</label>
+      <div class="formArea__slot">
+        <div class="calculate">
+          <button class="calculate__btn" type="button" aria-label="уменьшить" data-target="min"></button>
+          <div class="calculate__area">
+            <input class="calculate__input" id="price" data-current-value="20000000" type="text" value="2 000 000">
+          </div>
+          <button class="calculate__btn calculate__btn--plus" type="button" data-target="plus"
+                  aria-label="увеличить"></button>
+        </div>
+      </div>
+      <div class="formArea__caption">
+        <p>От <span>1 200 000</span> до <span>25 000 000</span> рублей</p>
+      </div>
+    </div>
+  </li>
+</template>
+
+<template class="js-range-calc-html">
+  <li class="element__listItem credit__initial">
+    <div class="formArea js-range-calculate">
+      <label class="formArea__label" for="contribution">Первоначальный взнос</label>
+      <div class="formArea__slot">
+        <div class="calculate">
+          <div class="calculate__area">
+            <input class="calculate__input" id="contribution" type="text" data-current-value="200000" data-prefix="рублей" value="200 000">
+          </div>
+        </div>
+      </div>
+      <div class="formArea__caption">
+        <div class="range">
+          <div class="range__bar">
+            <button class="range__btn" type="button" aria-label="ползунок"></button>
+          </div>
+          <div class="range__caption">
+            <p class="range__captionLeft">10%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+</template>
+
+<template class="js-summary-info">
+  <div class="credit__boxInfo">
+    <p class="grayBox__title">Наш банк не выдаёт <span>ипотечные кредиты</span> меньше 200 000 рублей.</p>
+    <p>Попробуйте использовать другие параметры для расчёта.</p>
+  </div>
+</template>
+
+<template class="js-total-html">
+  <div class="credit__box credit__box--form grayBox grayBox--xs">
+    <p class="grayBox__title">Шаг 3. Оформление заявки</p>
+    <form class="grayBox__form form js-total" action="#" name="#" method="post">
+      <ul class="form__list">
+        <li class="form__listItem">
+          <label class="formArea formArea--horizontal">
+            <span class="formArea__label">Номер заявки</span>
+            <span class="formArea__slot">
+          <input class="formArea__input" type="text" value="№ 0010" disabled>
+        </span>
+          </label>
+        </li>
+        <li class="form__listItem">
+          <label class="formArea formArea--horizontal">
+            <span class="formArea__label">Цель кредита</span>
+            <span class="formArea__slot">
+          <input class="formArea__input" type="text" value="Ипотека" disabled>
+        </span>
+          </label>
+        </li>
+        <li class="form__listItem">
+          <label class="formArea formArea--horizontal">
+            <span class="formArea__label js-target-form">Стоимость недвижимости</span>
+            <span class="formArea__slot">
+          <input class="formArea__input" type="text" value="2 000 000 рублей" disabled>
+        </span>
+          </label>
+        </li>
+        <li class="form__listItem">
+          <label class="formArea formArea--horizontal js-total-initial">
+            <span class="formArea__label">Первоначальный взнос</span>
+            <span class="formArea__slot">
+          <input class="formArea__input" type="text" value="200 000 рублей" disabled>
+        </span>
+          </label>
+        </li>
+        <li class="form__listItem">
+          <label class="formArea formArea--horizontal js-total-term">
+            <span class="formArea__label">Срок кредитования</span>
+            <span class="formArea__slot">
+          <input class="formArea__input" type="text" value="5 лет" disabled>
+        </span>
+          </label>
+        </li>
+      </ul>
+      <div class="form__grid">
+        <div class="form__row">
+          <div class="form__cell">
+            <label class="formArea formArea--withoutLabel">
+              <span class="formArea__label">ФИО</span>
+              <span class="formArea__slot">
+                      <input class="formArea__input" type="text" placeholder="ФИО" required>
+                    </span>
+            </label>
+          </div>
+        </div>
+        <div class="form__row">
+          <div class="form__cell form__cell--w50">
+            <label class="formArea formArea--withoutLabel">
+              <span class="formArea__label">Телефон</span>
+              <span class="formArea__slot">
+                      <input class="formArea__input js-phone" type="text" placeholder="Телефон" required>
+                    </span>
+            </label>
+          </div>
+          <div class="form__cell form__cell--w50">
+            <label class="formArea formArea--withoutLabel">
+              <span class="formArea__label">E-mail</span>
+              <span class="formArea__slot">
+                      <input class="formArea__input" type="email" placeholder="E-mail" required>
+                    </span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <button class="form__btn btn btn--form">Отправить</button>
+    </form>
+  </div>
+</template>
+
 </body>
 </html>
