@@ -1,5 +1,4 @@
-import {createElement, getStringOfNumb} from './utils';
-var PREFIX = ' рублей';
+import {getStringOfNumb} from './utils';
 
 var Selector = {
   BTN_MIN: '.calculate__btn[data-target="min"]',
@@ -12,25 +11,31 @@ var Class = {
   ERROR: 'formArea__error',
 };
 
-class Calc {
-  constructor(calcParameters) {
-    this.name = calcParameters.name;
-    this.value = calcParameters.value;
-    this.min = calcParameters.min;
-    this.max = calcParameters.max;
-    this.place = calcParameters.place;
-    this.step = calcParameters.step;
+class RangeCalc {
+  constructor(block) {
+    this.element = block;
     this.event = new Event('calc');
+    this.input = this.element.querySelector(Selector.INPUT);
+    this.value = parseInt(this.input.dataset.value,10);
+    this.min = parseInt(this.input.dataset.min,10);
+    this.max = parseInt(this.input.dataset.max,10);
+    this.step = parseInt(this.input.dataset.step,10);
+    this.prefix = this.input.dataset.prefix;
+    this.error = this.input.dataset.errorMessage;
+    this.btnMin = this.element.querySelector(Selector.BTN_MIN);
+    this.btnPlus = this.element.querySelector(Selector.BTN_PLUS);
 
     this.onClick = function (evt) {
       if (evt.target === this.btnMin) {
         this.value = Math.max(this.value -= this.step, this.min);
+        this.input.dataset.value = this.value;
       }
       if (evt.target === this.btnPlus) {
         this.value = Math.min(this.value += this.step, this.max);
+        this.input.dataset.value = this.value;
       }
-      this.input.value = this.getInputValue();
-      this.input.setAttribute('value', this.getInputValue());
+      this.input.value = this.getInputValueString();
+      this.input.setAttribute('value', this.getInputValueString());
       this.element.dispatchEvent(this.event);
       this.element.classList.remove(Class.ERROR);
     }.bind(this);
@@ -38,6 +43,7 @@ class Calc {
     this.onChange = function () {
 
       this.value = this.input.value;
+      this.input.dataset.value = this.value;
 
       this.element.dispatchEvent(this.event);
     }.bind(this);
@@ -50,8 +56,8 @@ class Calc {
         this.value = this.min;
         this.input.setAttribute('value', this.error);
       } else {
-        this.input.setAttribute('value', this.getInputValue());
-        this.input.value = this.getInputValue();
+        this.input.setAttribute('value', this.getInputValueString());
+        this.input.value = this.getInputValueString();
       }
       this.input.removeEventListener('blur', this.onBlur);
       this.input.removeEventListener('change', this.onChange);
@@ -67,53 +73,26 @@ class Calc {
     }.bind(this);
   }
 
-  getInputValue() {
+  getInputValueString() {
     var numbOfString = getStringOfNumb(this.value);
-    return numbOfString + PREFIX;
+    return numbOfString + ' ' + this.prefix;
   }
 
-  getTemplate() {
-    return '<div class="formArea js-calculate">' +
-      '<label class="formArea__label" for="price">' + this.name + '</label>' +
-      '<div class="formArea__slot">' +
-      '<div class="calculate">' +
-      '<button class="calculate__btn" type="button" aria-label="уменьшить" data-target="min"></button>' +
-      '<div class="calculate__area">' +
-      '<input class="calculate__input" id="price" type="text" value="' + this.getInputValue() + '">' +
-      '</div>' +
-      '<button class="calculate__btn calculate__btn--plus" type="button" data-target="plus" aria-label="увеличить"></button>' +
-      '</div>' +
-      '<span class="formArea__error">Некорректное значение</span>' +
-      '</div>' +
-      '<div class="formArea__caption">' +
-      '<p>От <span>' + getStringOfNumb(this.min) + '</span> до <span>' + getStringOfNumb(this.max) + '</span> рублей</p>' +
-      '</div>' +
-      '</div>';
-  }
-
-  getCreateElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-      this.error = this.element.querySelector(Selector.ERROR).innerText;
-    }
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
-    this.error = null;
+  getInputValueNum() {
+    return parseInt(this.input.dataset.value,10);
   }
 
   init() {
-    this.place.insertAdjacentElement('beforeend', this.getCreateElement());
-    this.input = this.element.querySelector(Selector.INPUT);
-    this.btnMin = this.element.querySelector(Selector.BTN_MIN);
-    this.btnPlus = this.element.querySelector(Selector.BTN_PLUS);
-
     this.btnMin.addEventListener('click', this.onClick);
     this.btnPlus.addEventListener('click', this.onClick);
     this.input.addEventListener('focus', this.onFocus);
   }
+
+  destroy() {
+    this.btnMin.removeEventListener('click', this.onClick);
+    this.btnPlus.removeEventListener('click', this.onClick);
+    this.input.removeEventListener('focus', this.onFocus);
+  }
 }
 
-export default Calc;
+export default RangeCalc;

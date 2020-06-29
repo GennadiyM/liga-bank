@@ -26,6 +26,7 @@
   margin-right: 30px;
 
   &--offer {
+    display: none;
     margin-top: 5px;
     margin-right: 0;
     margin-left: auto;
@@ -41,6 +42,7 @@
   }
 
   &--form {
+    display: none;
     margin-top: 67px;
     margin-left: auto;
     margin-right: auto;
@@ -87,5 +89,40 @@
 }
 
 .credit__boxInfo {
+  display: none;
+}
+
+.credit__slide {
+  display: none;
+  margin-top: 33px;
+
+  @include media(xl) {
+    margin-top: 35px;
+  }
+
+  @include media(m) {
+    margin-top: 25px;
+  }
+}
+
+.credit--mortgage .credit__slide--mortgage {
+  display: block;
+}
+
+.credit--car .credit__slide--car {
+  display: block;
+}
+
+.credit--consumer .credit__slide--consumer {
+  display: block;
+}
+
+.credit--mortgage .credit__box--offer,
+.credit--car .credit__box--offer,
+.credit--consumer .credit__box--offer {
+  display: block;
+}
+
+.credit--formShow .credit__box--form {
   display: block;
 }
