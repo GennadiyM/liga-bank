@@ -31,7 +31,6 @@ var select = function () {
   var selectSlot = selectInput.closest(Selector.ELEMENT_SLOT);
   var creditBlock = document.querySelector(Selector.CREDIT);
   var credit = new CreditController();
-  credit.init();
 
   $(selectInput).select2({
     minimumResultsForSearch: Infinity,
@@ -45,13 +44,13 @@ var select = function () {
     var target = selectInput.value;
     var checkedOption = document.querySelector('option[value=' + target + ']');
     var calcParameters = checkedOption.dataset;
+    credit.setMainParameters(calcParameters);
 
     creditBlock.classList.remove(Class.CAR_SHOW);
     creditBlock.classList.remove(Class.MORTGAGE_SHOW);
     creditBlock.classList.remove(Class.CONSUMER_SHOW);
     creditBlock.classList.add('credit--' + target);
-    credit.set(target);
-    credit.setMainParameters(calcParameters);
+    credit.init();
   });
 
   return selectInput;

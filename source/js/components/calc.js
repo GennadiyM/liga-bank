@@ -16,49 +16,50 @@ class RangeCalc {
     this.element = block;
     this.event = new Event('calc');
     this.input = this.element.querySelector(Selector.INPUT);
-    this.value = parseInt(this.input.dataset.value,10);
-    this.min = parseInt(this.input.dataset.min,10);
-    this.max = parseInt(this.input.dataset.max,10);
-    this.step = parseInt(this.input.dataset.step,10);
+    this.value = parseInt(this.input.dataset.value, 10);
+    this.min = parseInt(this.input.dataset.min, 10);
+    this.max = parseInt(this.input.dataset.max, 10);
+    this.step = parseInt(this.input.dataset.step, 10);
     this.prefix = this.input.dataset.prefix;
     this.error = this.input.dataset.errorMessage;
     this.btnMin = this.element.querySelector(Selector.BTN_MIN);
     this.btnPlus = this.element.querySelector(Selector.BTN_PLUS);
 
-    this.onClick = function (evt) {
+    this.onClickBtn = function (evt) {
       if (evt.target === this.btnMin) {
         this.value = Math.max(this.value -= this.step, this.min);
-        this.input.dataset.value = this.value;
       }
       if (evt.target === this.btnPlus) {
         this.value = Math.min(this.value += this.step, this.max);
-        this.input.dataset.value = this.value;
       }
       this.input.value = this.getInputValueString();
       this.input.setAttribute('value', this.getInputValueString());
-      this.element.dispatchEvent(this.event);
       this.element.classList.remove(Class.ERROR);
+      this.element.dispatchEvent(this.event);
     }.bind(this);
 
     this.onChange = function () {
+      if (this.min > this.input.value && this.input.value < this.max) {
 
-      this.value = this.input.value;
-      this.input.dataset.value = this.value;
-
-      this.element.dispatchEvent(this.event);
+        this.value = this.input.value;
+        this.element.dispatchEvent(this.event);
+      }
     }.bind(this);
 
     this.onBlur = function () {
-      this.input.type = 'text';
 
-      if (this.value < this.min || this.value > this.max) {
+      this.input.type = 'text';
+      if (this.input.value < this.min || this.input.value > this.max) {
         this.input.value = this.error;
-        this.value = this.min;
         this.input.setAttribute('value', this.error);
-      } else {
+      }
+
+      if (this.input.value > this.min && this.input.value < this.max) {
+        this.value = parseInt(this.input.value, 10);
         this.input.setAttribute('value', this.getInputValueString());
         this.input.value = this.getInputValueString();
       }
+
       this.input.removeEventListener('blur', this.onBlur);
       this.input.removeEventListener('change', this.onChange);
     }.bind(this);
@@ -68,6 +69,7 @@ class RangeCalc {
       this.input.type = 'number';
       this.input.value = this.value;
       this.input.setAttribute('value', this.value);
+      this.input.setAttribute('step', this.step);
       this.input.addEventListener('blur', this.onBlur);
       this.input.addEventListener('change', this.onChange);
     }.bind(this);
@@ -79,18 +81,18 @@ class RangeCalc {
   }
 
   getInputValueNum() {
-    return parseInt(this.input.dataset.value,10);
+    return this.value;
   }
 
   init() {
-    this.btnMin.addEventListener('click', this.onClick);
-    this.btnPlus.addEventListener('click', this.onClick);
+    this.btnMin.addEventListener('click', this.onClickBtn);
+    this.btnPlus.addEventListener('click', this.onClickBtn);
     this.input.addEventListener('focus', this.onFocus);
   }
 
   destroy() {
-    this.btnMin.removeEventListener('click', this.onClick);
-    this.btnPlus.removeEventListener('click', this.onClick);
+    this.btnMin.removeEventListener('click', this.onClickBtn);
+    this.btnPlus.removeEventListener('click', this.onClickBtn);
     this.input.removeEventListener('focus', this.onFocus);
   }
 }

@@ -23,114 +23,120 @@ class CreditController {
       termCalc: document.querySelector(Selector.MORTGAGE_CONTAINER + ' ' + Selector.TERM_CALC),
       optionInput: document.querySelector(Selector.MORTGAGE_CONTAINER + ' ' + Selector.OPTION_INPUT),
     };
-    this.carBlocks = {
-      mainCalc: document.querySelector(Selector.CAR_CONTAINER + ' ' + Selector.MAIN_CALC),
-      paymentCalc: document.querySelector(Selector.CAR_CONTAINER + ' ' + Selector.PAYMENT_CALC),
-      termCalc: document.querySelector(Selector.CAR_CONTAINER + ' ' + Selector.TERM_CALC),
-    };
-    this.consumerBlocks = {
-      mainCalc: document.querySelector(Selector.CONSUMER_CONTAINER + ' ' + Selector.MAIN_CALC),
-      termCalc: document.querySelector(Selector.CONSUMER_CONTAINER + ' ' + Selector.TERM_CALC),
-    };
+    // this.carBlocks = {
+    //   mainCalc: document.querySelector(Selector.CAR_CONTAINER + ' ' + Selector.MAIN_CALC),
+    //   paymentCalc: document.querySelector(Selector.CAR_CONTAINER + ' ' + Selector.PAYMENT_CALC),
+    //   termCalc: document.querySelector(Selector.CAR_CONTAINER + ' ' + Selector.TERM_CALC),
+    // };
+    // this.consumerBlocks = {
+    //   mainCalc: document.querySelector(Selector.CONSUMER_CONTAINER + ' ' + Selector.MAIN_CALC),
+    //   termCalc: document.querySelector(Selector.CONSUMER_CONTAINER + ' ' + Selector.TERM_CALC),
+    // };
 
     this.onMainCalc = function () {
-      this.value = this[this.target].MainCalc.getInputValueNum();
-      if (this[this.target].PaymentCalc) {
-        this[this.target].PaymentCalc.set(this.value);
-      }
-      // this.result.setResultValue(this[this.target].MainCalc.getInputValueString());
+      this.value = this.MainCalc.getInputValueNum();
+      this.getMinPayment();
+      this.getInnerMortgageParameters();
+      this.Result.renderValue(this.getResultParameters());
+      this.PaymentCalc.set(this.value);
+    }.bind(this);
+
+    this.onPaymentCalc = function () {
+      this.payment = this.PaymentCalc.getInputValueNum();
+      this.getInnerMortgageParameters();
+      this.Result.renderValue(this.getResultParameters());
     }.bind(this);
 
     this.onChangeMortgageOption = function () {
-      this.getMortgageSumCredit();
+      this.getInnerMortgageParameters();
+      this.PaymentCalc.setMaxPayment(this.maxPayment);
+      this.getMinPayment();
+      this.Result.renderValue(this.getResultParameters());
     }.bind(this);
   }
 
-  getMortgageSumCredit() {
-    this.mortgage.bonus = this.mortgageBlocks.optionInput.checked ? parseInt(this.mortgageBlocks.optionInput.dataset.bonus, 10) : 0;
-    this.sumCredit = this.value - this.mortgage.bonus;
+  getMortgageCalcInit() {
+    this.MainCalc = new Calc(this.mortgageBlocks.mainCalc);
+    this.MainCalc.init();
+    this.TermCalc = new TermCalc(this.mortgageBlocks.termCalc);
+    this.TermCalc.init();
+    this.value = this.MainCalc.getInputValueNum();
+    this.PaymentCalc = new PaymentCalc(this.mortgageBlocks.paymentCalc, this.value);
+    this.PaymentCalc.init();
+    this.minPercentPayment = this.PaymentCalc.getMinPercent();
   }
 
-  getMortgageCalcInit() {
-    this.mortgage = {
-      MainCalc: new Calc(this.mortgageBlocks.mainCalc),
-      TermCalc: new TermCalc(this.mortgageBlocks.termCalc),
-    };
+  getInnerMortgageParameters() {
+    this.payment = this.PaymentCalc.getInputValueNum();
+    this.getMortgageSumAndMaxPayment();
+    this.percentPayment = this.PaymentCalc.getInterestPercentPayment();
+    this.term = this.TermCalc.getInputValueInMonth();
+    this.interestRate = (this.percentPayment < this.rateTreshold) ? (this.rateMax / 12) / 100 : (this.rateMin / 12) / 100;
+  }
+
+  getMortgageSumAndMaxPayment() {
+    this.bonus = this.mortgageBlocks.optionInput.checked ? parseInt(this.mortgageBlocks.optionInput.dataset.bonus, 10) : 0;
+    this.sumCredit = this.value - this.bonus - this.payment;
+    this.maxPayment = this.sumCredit - this.paymentThreshold;
+  }
+
+  getMinPayment() {
+    this.minPayment = this.sumCredit * this.minPercentPayment / 100;
+  }
+
+  getMonthPayment() {
+    return Math.round(this.sumCredit * (this.interestRate + (this.interestRate / (Math.pow(this.interestRate + 1, this.term) - 1))));
+  }
+
+  getIncome() {
+    return this.getMonthPayment() * 100 / 45;
+  }
+
+  getMortgageEventListener() {
     this.mortgageBlocks.mainCalc.addEventListener('calc', this.onMainCalc);
-    this.value = this.mortgage.MainCalc.getInputValueNum();
-    this.mortgage.PaymentCalc = new PaymentCalc(this.mortgageBlocks.paymentCalc, this.value);
-    this.getMortgageSumCredit();
+    this.mortgageBlocks.paymentCalc.addEventListener('calc', this.onPaymentCalc);
     this.mortgageBlocks.optionInput.addEventListener('change', this.onChangeMortgageOption);
   }
 
-  getCarCalcInit() {
-    this.car = {
-      MainCalc: new Calc(this.carBlocks.mainCalc),
-      TermCalc: new TermCalc(this.carBlocks.termCalc),
+  getResultStartParameters() {
+    return {
+      nameForm: this.parameters.nameForm,
+      nameInfo: this.parameters.nameInfo,
+      nameResult: this.parameters.nameResult,
     };
-    this.carBlocks.mainCalc.addEventListener('calc', this.onMainCalc);
-    this.value = this.car.MainCalc.getInputValueNum();
-    this.car.PaymentCalc = new PaymentCalc(this.carBlocks.paymentCalc, this.value);
   }
 
-  getConsumerCalcInit() {
-    this.consumer = {
-      MainCalc: new Calc(this.consumerBlocks.mainCalc),
-      TermCalc: new TermCalc(this.consumerBlocks.termCalc),
+  getResultParameters() {
+    return {
+      summer: this.sumCredit,
+      rate: this.interestRate,
+      monthPayment: this.getMonthPayment(),
+      income: this.getIncome(),
+      value: this.PaymentCalc.getInputValueNum(),
+      maxPayment: this.maxPayment,
     };
-    this.consumerBlocks.mainCalc.addEventListener('calc', this.onMainCalc);
-    this.value = this.consumer.MainCalc.getInputValueNum();
   }
 
   setMainParameters(parameters) {
-    this.mainParameters = parameters;
-  }
-
-  set(target) {
-    if (!this.target) {
-      if (this[target].MainCalc) {
-        this[target].MainCalc.init();
-      }
-      if (this[target].PaymentCalc) {
-        this[target].PaymentCalc.init();
-      }
-      if (this[target].TermCalc) {
-        this[target].TermCalc.init();
-      }
-    } else {
-      if (this[this.target].MainCalc) {
-        this[this.target].MainCalc.destroy();
-      }
-      if (this[this.target].PaymentCalc) {
-        this[this.target].PaymentCalc.destroy();
-      }
-      if (this[this.target].TermCalc) {
-        this[this.target].TermCalc.destroy();
-      }
-      if (this[target].MainCalc) {
-        this[target].MainCalc.init();
-      }
-      if (this[target].PaymentCalc) {
-        this[target].PaymentCalc.init();
-      }
-      if (this[target].TermCalc) {
-        this[target].TermCalc.init();
-      }
-    }
-    this.target = target;
-  }
-
-  setResult() {
-    if (!this.result) {
-      this.result = new ResultCredit(this.mainParameters, this[this.target].MainCalc.getInputValueString(), 45, 30, 45);
-    }
-    this.result.renderValue(this.mainParameters);
+    this.parameters = parameters;
+    this.nameForm = parameters.nameForm;
+    this.nameInfo = parameters.nameInfo;
+    this.nameResult = parameters.nameResult;
+    this.targetForm = parameters.targetForm;
+    this.paymentThreshold = parseInt(this.parameters.paymentThreshold, 10);
+    this.rateTreshold = parseInt(this.parameters.rateTreshold, 10);
+    this.income = parseInt(this.parameters.income, 10);
+    this.rateMin = parseFloat(this.parameters.rateMin);
+    this.rateMax = parseFloat(this.parameters.rateMax);
   }
 
   init() {
     this.getMortgageCalcInit();
-    this.getCarCalcInit();
-    this.getConsumerCalcInit();
+    this.getInnerMortgageParameters();
+    this.PaymentCalc.setMaxPayment(this.maxPayment);
+    this.getMortgageEventListener();
+    this.Result = new ResultCredit(this.getResultStartParameters());
+    this.Result.renderValue(this.getResultParameters());
   }
 }
 

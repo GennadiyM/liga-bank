@@ -419,6 +419,11 @@
                           data-name-result="Сумма ипотеки"
                           data-name-form="Ипотека"
                           data-name-info="ипотечные кредиты"
+                          data-payment-threshold="500000"
+                          data-rate-treshold="15"
+                          data-rate-max="9.40"
+                          data-rate-min="8.50"
+                          data-income="45"
                           data-target-form="Сумма недвижимости">Ипотечное кредитование</option>
                   <option value="car"
                           data-name-result="Сумма автокредита"
@@ -472,7 +477,6 @@
                                 <input class="calculate__input"
                                        data-percent="10"
                                        data-prefix="рублей"
-                                       data-error="500000"
                                        data-range-step="5"
                                        id="mortgage-contribution" type="text" inputmode="numeric" value="200 000 рублей">
                               </div>
@@ -709,38 +713,41 @@
               </div>
             </div>
           </div>
-          <div class="credit__box credit__box--offer grayBox js-credit-result">
-            <div class="credit__boxContent js-result-main">
-              <p class="grayBox__title">Наше предложение</p>
-              <div class="grayBox__grid">
-                <div class="grayBox__row">
-                  <div class="grayBox__cell js-result-name">
-                    <p class="grayBox__value">1 330 000 рублей</p>
-                    <p class="grayBox__caption">Сумма ипотеки</p>
-                  </div>
-                  <div class="grayBox__cell grayBox__cell--small js-result-percent">
-                    <p class="grayBox__value">9,40%</p>
-                    <p class="grayBox__caption">Процентная ставка</p>
-                  </div>
-                </div>
-                <div class="grayBox__row">
-                  <div class="grayBox__cell js-result-payment">
-                    <p class="grayBox__value">27 868 рублей</p>
-                    <p class="grayBox__caption">Ежемесячный платеж</p>
-                  </div>
-                  <div class="grayBox__cell grayBox__cell--small js-result-income">
-                    <p class="grayBox__value">61 929 рублей</p>
-                    <p class="grayBox__caption">Необходимый доход</p>
-                  </div>
-                </div>
-              </div>
-              <div class="grayBox__btn btn btn--w100">Оформить заявку</div>
-            </div>
-            <div class="credit__boxInfo js-result-info">
-              <p class="grayBox__title">Наш банк не выдаёт <span class="js-result-info-name">ипотечные кредиты</span> меньше 200 000 рублей.</p>
-              <p>Попробуйте использовать другие параметры для расчёта.</p>
-            </div>
-          </div>
+                    <div class="credit__box credit__box--offer grayBox js-credit-result">
+                      <div class="credit__boxContent js-result-main">
+                        <p class="grayBox__title">Наше предложение</p>
+                        <div class="grayBox__grid">
+                          <div class="grayBox__row">
+                            <div class="grayBox__cell js-result-name">
+                              <p class="grayBox__value">1 330 000 рублей</p>
+                              <p class="grayBox__caption">Сумма ипотеки</p>
+                            </div>
+                            <div class="grayBox__cell grayBox__cell--small js-result-percent">
+                              <p class="grayBox__value">9,40%</p>
+                              <p class="grayBox__caption">Процентная ставка</p>
+                            </div>
+                          </div>
+                          <div class="grayBox__row">
+                            <div class="grayBox__cell js-result-payment">
+                              <p class="grayBox__value">27 868 рублей</p>
+                              <p class="grayBox__caption">Ежемесячный платеж</p>
+                            </div>
+                            <div class="grayBox__cell grayBox__cell--small js-result-income">
+                              <p class="grayBox__value">61 929 рублей</p>
+                              <p class="grayBox__caption">Необходимый доход</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="grayBox__btn btn btn--w100">Оформить заявку</div>
+                      </div>
+                      <div class="credit__boxInfo js-result-info">
+                        <p class="grayBox__title">Наш банк не выдаёт <span class="js-result-info-name">ипотечные кредиты</span> меньше 200 000 рублей.</p>
+                        <p>Попробуйте использовать другие параметры для расчёта.</p>
+                      </div>
+                    </div>
+
+
+
         </div>
         <div class="credit__box credit__box--form grayBox grayBox--xs">
           <p class="grayBox__title">Шаг 3. Оформление заявки</p>

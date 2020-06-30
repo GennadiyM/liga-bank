@@ -48,6 +48,10 @@ class CalcTerm {
     return numbOfString + ' ' + this.currentPrefix;
   }
 
+  getInputValueInMonth() {
+    return this.value * 12;
+  }
+
   getCurrentPrefix() {
     var count = this.value % 100;
     if (count >= 5 && count <= 20) {
