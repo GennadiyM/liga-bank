@@ -11,6 +11,7 @@
     "babel-loader": "^8.1.0",
     "browser-sync": "2.26.x",
     "core-js": "^3.6.5",
+    "custom-event-polyfill": "^1.0.7",
     "element-closest-polyfill": "^1.0.0",
     "eslint": "4.16.0",
     "eslint-config-htmlacademy": "0.4.x",

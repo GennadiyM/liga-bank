@@ -1,24 +1,27 @@
 var utils = function () {
-  var Selector = {
+  window.Selector = {
     BODY: '.page',
     CREDIT: '.js-credit',
-    OPTION_MORTAGE: '.js-option-mortgage',
-    OPTION_CASCO: '.js-option-casсo',
-    OPTION_HEALTH: '.js-option-health',
+    BTN_MIN: '.calculate__btn[data-target="min"]',
+    BTN_PLUS: '.calculate__btn[data-target="plus"]',
+    RANGE: '.range__btn',
+    RANGE_SCALE: '.range__scale',
+    RANGE_INFO_LEFT: '.range__captionLeft',
+    RANGE_INFO_RIGHT: '.range__captionRight',
+    RANGE_BAR: '.range__bar',
+    SUMMER_CALC: '.js-main-calc',
+    PAYMENT_CALC: '.js-payment-calc',
+    TERM_CALC: '.js-term-calc',
+    INPUT: '.calculate__input',
+    OPTION_INPUT: '.option__input'
   };
 
-  window.body = document.querySelector(Selector.BODY);
-  window.credit = document.querySelector(Selector.CREDIT);
-  window.optionMortage = document.querySelector(Selector.OPTION_MORTAGE);
-  window.optionCasco = document.querySelector(Selector.OPTION_CASCO);
-  window.optionHealth = document.querySelector(Selector.OPTION_HEALTH);
-};
+  window.Class = {
+    FORM_SHOW: 'credit--formShow',
+  };
 
-var createElement = function (template) {
-  var newElement = document.createElement('div');
-  newElement.innerHTML = template;
-
-  return newElement.firstChild;
+  window.body = document.querySelector(window.Selector.BODY);
+  window.credit = document.querySelector(window.Selector.CREDIT);
 };
 
 var getStringOfNumb = function (numb) {
@@ -26,5 +29,5 @@ var getStringOfNumb = function (numb) {
   return stringOfNum.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, '$1' + ' ');
 };
 
-export {createElement, getStringOfNumb};
+export {getStringOfNumb};
 export default utils;

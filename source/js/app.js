@@ -1,5 +1,7 @@
 import 'element-closest-polyfill';
 import 'core-js/features/dom-collections/for-each';
+import 'core-js/features/promise';
+import 'custom-event-polyfill';
 import promo from './components/promo.js';
 import select from './components/select.js';
 import services from './components/services.js';

@@ -1,41 +1,40 @@
 import {getStringOfNumb} from './utils';
 
-var Selector = {
-  INPUT: '.calculate__input',
-  BTN_MIN: '.calculate__btn[data-target="min"]',
-  BTN_PLUS: '.calculate__btn[data-target="plus"]',
-  RANGE: '.range__btn',
-  RANGE_INFO: '.range__captionLeft',
-  RANGE_BAR: '.range__bar',
-};
-
-var Class = {
-  ERROR: 'formArea__error',
-};
-
 class CalcPayment {
   constructor(block, value) {
     this.element = block;
-    this.event = new Event('calc');
-    this.input = this.element.querySelector(Selector.INPUT);
+    if (typeof (Event) === 'function') {
+      this.event = new Event('payment');
+    } else {
+      this.event = document.createEvent('Event');
+      this.event.initEvent('payment', true, true);
+    }
+    this.input = this.element.querySelector(window.Selector.INPUT);
     this.sumCredit = parseInt(value, 10);
-    this.percent = parseInt(this.input.dataset.percent,10);
-    this.value = parseInt(value,10) * this.percent / 100;
-    this.min = parseInt(value,10) * this.percent / 100;
+    this.percent = parseInt(this.input.dataset.percent, 10);
+    this.currentPercent = this.percent;
+    this.value = parseInt(value, 10) * this.percent / 100;
+    this.min = parseInt(value, 10) * this.percent / 100;
     this.prefix = this.input.dataset.prefix;
     this.input.value = this.getInputValueString();
-    this.rangeStep = parseInt(this.input.dataset.rangeStep,10);
-    this.range = this.element.querySelector(Selector.RANGE);
-    this.rangeInfo = this.element.querySelector(Selector.RANGE_INFO);
-    this.rangeBar = this.element.querySelector(Selector.RANGE_BAR);
+    this.rangeStep = parseInt(this.input.dataset.rangeStep, 10);
+    this.range = this.element.querySelector(window.Selector.RANGE);
+    this.rangeScale = this.element.querySelector(window.Selector.RANGE_SCALE);
+    this.rangePrefix = '%';
+    this.rangeInfo = this.element.querySelector(window.Selector.RANGE_INFO_LEFT);
+    this.rangeInfo.innerHTML = this.currentPercent + this.rangePrefix;
+    this.rangeBar = this.element.querySelector(window.Selector.RANGE_BAR);
+    this.coefficient = this.rangeStep * 100 / (100 - this.percent);
     this.rangeParameters = {};
 
     this.onChange = function () {
-      this.value = Math.max(this.input.value, this.min);
+      this.value = Math.round(Math.min(Math.max(this.input.value, this.min), this.sumCredit));
       this.input.setAttribute('value', this.value);
       this.input.value = this.value;
-      this.element.dispatchEvent(this.event);
       this.getRangeInfo();
+      this.currentPercent = this.getInterestPercentPayment();
+      this.getShiftRange(Math.min(((100 - this.percent) / this.rangeStep - (100 - this.currentPercent) / this.rangeStep) * this.coefficient, this.rangeParameters.maxRangeStyle));
+      this.element.dispatchEvent(this.event);
     }.bind(this);
 
     this.onBlur = function () {
@@ -48,10 +47,9 @@ class CalcPayment {
     }.bind(this);
 
     this.onFocus = function () {
-      this.element.classList.remove(Class.ERROR);
       this.input.type = 'number';
       this.input.value = this.value;
-      this.input.setAttribute('step', this.value * this.rangeStep / 100);
+      this.input.setAttribute('step', this.sumCredit * this.rangeStep / 100);
       this.input.setAttribute('value', this.value);
       this.input.addEventListener('blur', this.onBlur);
       this.input.addEventListener('change', this.onChange);
@@ -59,7 +57,6 @@ class CalcPayment {
 
     this.onMouseUp = function (evt) {
       evt.preventDefault();
-
       window.removeEventListener('mousemove', this.onMouseMove);
       window.removeEventListener('mouseup', this.onMouseUp);
     }.bind(this);
@@ -68,13 +65,7 @@ class CalcPayment {
       if (evt.which !== 1) {
         return;
       }
-      this.rangeParameters.widthRangeBar = this.rangeBar.clientWidth;
-      this.rangeParameters.widthRange = this.range.clientWidth;
-      this.rangeParameters.maxRangeStyle = Math.round((this.rangeParameters.widthRangeBar - this.rangeParameters.widthRange) * 100 / this.rangeParameters.widthRangeBar);
-      this.rangeParameters.rangeBarLeftCoordinates = this.rangeBar.getBoundingClientRect().x;
-      this.rangeParameters.rangeStartCoordinates = this.range.getBoundingClientRect().x;
-      this.rangeParameters.rangeStartShift = this.rangeParameters.rangeStartCoordinates - this.rangeParameters.rangeBarLeftCoordinates;
-
+      this.getRangeParameters();
       this.rangeParameters.rangeClickCoordinate = evt.offsetX;
       this.rangeParameters.mouseStartPos = this.rangeParameters.rangeStartCoordinates + this.rangeParameters.rangeClickCoordinate;
       window.addEventListener('mousemove', this.onMouseMove);
@@ -83,36 +74,19 @@ class CalcPayment {
 
     this.onMouseMove = function (evt) {
       evt.preventDefault();
-
       this.rangeParameters.mouseShift = evt.clientX - this.rangeParameters.mouseStartPos;
-      this.rangeParameters.rangePercent = Math.round((this.rangeParameters.rangeStartShift + this.rangeParameters.mouseShift) * 100 / this.rangeParameters.widthRangeBar);
-
-      this.rangeParameters.styleValue = Math.max(Math.min(this.rangeParameters.rangePercent, this.rangeParameters.maxRangeStyle), 0);
-      console.log(this.rangeParameters.styleValue);
-      console.log(this.roundTo5(this.rangeParameters.styleValue));
-
-      // this.getShiftRange(this.rangeParameters.styleValue)
-      this.getShiftRange(this.roundTo5(this.rangeParameters.styleValue));
-
-
+      this.rangeParameters.rangePercent = (this.rangeParameters.rangeStartShift + this.rangeParameters.mouseShift) * 100 / this.rangeParameters.widthRangeBar;
+      this.rangeParameters.styleValue = Math.max(Math.min(this.roundToRange(this.rangeParameters.rangePercent), 100), 0);
+      this.getShiftRange(Math.min(this.rangeParameters.styleValue, this.rangeParameters.maxRangeStyle));
+      this.currentPercent = Math.round(((100 - this.percent) / this.rangeStep - (100 - this.rangeParameters.styleValue) / this.coefficient) * this.rangeStep) + this.percent;
+      this.resetParameter();
+      this.element.dispatchEvent(this.event);
     }.bind(this);
   }
 
-  getShiftRange(value) {
-    this.range.style.left = value + '%';
-  }
-
-  roundTo5(num) {
-    return Math.round(num / this.rangeStep) * this.rangeStep * 1.1;
-  }
-
-  setMaxPayment(value) {
-    this.maxPayment = value;
-  }
-
   getInputValueString() {
-    var numbOfString = getStringOfNumb(this.value);
-    return numbOfString + ' ' + this.prefix;
+    this.numbOfString = getStringOfNumb(this.value);
+    return this.numbOfString + ' ' + this.prefix;
   }
 
   getInputValueNum() {
@@ -121,11 +95,6 @@ class CalcPayment {
 
   getMinPercent() {
     return this.percent;
-  }
-
-  init() {
-    this.input.addEventListener('focus', this.onFocus);
-    this.range.addEventListener('mousedown', this.onMouseDownRange);
   }
 
   destroy() {
@@ -137,13 +106,48 @@ class CalcPayment {
   }
 
   getRangeInfo() {
-    this.rangeInfo.innerText = Math.round(this.getInterestPercentPayment());
+    this.rangeInfo.innerText = Math.round(this.getInterestPercentPayment()) + this.rangePrefix;
+  }
+
+  getShiftRange(value) {
+    this.range.style.left = value + '%';
+    this.rangeScale.style.width = value + '%';
+  }
+
+  roundToRange(num) {
+    return Math.round(num / this.coefficient) * this.coefficient;
+  }
+
+  getRangeParameters() {
+    this.rangeParameters.widthRangeBar = this.rangeBar.clientWidth;
+    this.rangeParameters.widthRange = this.range.clientWidth;
+    this.rangeParameters.maxRangeStyle = Math.round((this.rangeParameters.widthRangeBar - this.rangeParameters.widthRange) * 100 / this.rangeParameters.widthRangeBar);
+    this.rangeParameters.rangeBarLeftCoordinates = this.rangeBar.getBoundingClientRect().left;
+    this.rangeParameters.rangeStartCoordinates = this.range.getBoundingClientRect().left;
+    this.rangeParameters.rangeStartShift = this.rangeParameters.rangeStartCoordinates - this.rangeParameters.rangeBarLeftCoordinates;
+  }
+
+  init() {
+    this.getRangeParameters();
+    this.input.addEventListener('focus', this.onFocus);
+    this.range.addEventListener('mousedown', this.onMouseDownRange);
+  }
+
+  destroy() {
+    this.input.removeEventListener('focus', this.onFocus);
+    this.range.removeEventListener('mousedown', this.onMouseDownRange);
+  }
+
+  resetParameter() {
+    this.rangeInfo.innerHTML = this.currentPercent + this.rangePrefix;
+    this.value = this.sumCredit * this.currentPercent / 100;
+    this.input.value = this.getInputValueString();
   }
 
   set(value) {
     this.sumCredit = parseInt(value, 10);
-    this.value = parseInt(value,10) * this.percent / 100;
-    this.min = parseInt(value,10) * this.percent / 100;
+    this.value = this.sumCredit * this.currentPercent / 100;
+    this.min = parseInt(value, 10) * this.percent / 100;
     this.input.value = this.getInputValueString();
   }
 }

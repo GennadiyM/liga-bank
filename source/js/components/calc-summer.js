@@ -11,10 +11,15 @@ var Class = {
   ERROR: 'formArea__error',
 };
 
-class RangeCalc {
+class CalcSummer {
   constructor(block) {
     this.element = block;
-    this.event = new Event('calc');
+    if (typeof (Event) === 'function') {
+      this.event = new Event('summer');
+    } else {
+      this.event = document.createEvent('Event');
+      this.event.initEvent('summer', true, true);
+    }
     this.input = this.element.querySelector(Selector.INPUT);
     this.value = parseInt(this.input.dataset.value, 10);
     this.min = parseInt(this.input.dataset.min, 10);
@@ -39,15 +44,13 @@ class RangeCalc {
     }.bind(this);
 
     this.onChange = function () {
-      if (this.min > this.input.value && this.input.value < this.max) {
-
-        this.value = this.input.value;
+      if (this.min < this.input.value && this.input.value < this.max) {
+        this.value = Math.round(this.input.value);
         this.element.dispatchEvent(this.event);
       }
     }.bind(this);
 
     this.onBlur = function () {
-
       this.input.type = 'text';
       if (this.input.value < this.min || this.input.value > this.max) {
         this.input.value = this.error;
@@ -76,8 +79,8 @@ class RangeCalc {
   }
 
   getInputValueString() {
-    var numbOfString = getStringOfNumb(this.value);
-    return numbOfString + ' ' + this.prefix;
+    this.numbOfString = getStringOfNumb(this.value);
+    return this.numbOfString + ' ' + this.prefix;
   }
 
   getInputValueNum() {
@@ -97,4 +100,4 @@ class RangeCalc {
   }
 }
 
-export default RangeCalc;
+export default CalcSummer;
