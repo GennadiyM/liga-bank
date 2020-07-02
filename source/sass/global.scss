@@ -62,3 +62,7 @@ input[type="text"]:disabled {
 .visually-hidden {
   @include visuallyHidden;
 }
+
+.d-none {
+  display: none;
+}

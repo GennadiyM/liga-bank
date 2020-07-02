@@ -44,6 +44,7 @@ var Selector = {
 
 var Class = {
   ERROR_FORM: 'grayBox--error',
+  DISPLAY_NONE: 'd-none'
 };
 
 class ResultCredit {
@@ -234,13 +235,13 @@ class ResultCredit {
     this.blocks.form.number.value = this.getNumberCase();
 
     if (!this.parameters.startPayment) {
-      this.parentStartPayment.style = 'display: none';
+      this.parentStartPayment.classList.add(Class.DISPLAY_NONE);
       if (!this.removedStartPayment) {
         this.removedStartPayment = this.slotStartPayment.removeChild(this.blocks.form.paymentValue);
       }
     } else {
       if (this.removedStartPayment) {
-        this.parentStartPayment.style = '';
+        this.parentStartPayment.classList.remove(Class.DISPLAY_NONE);
         this.slotStartPayment.insertAdjacentElement('beforeend', this.removedStartPayment);
         this.removedStartPayment = false;
       }
