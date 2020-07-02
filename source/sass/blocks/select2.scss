@@ -139,6 +139,10 @@
     padding-left: 22px;
     border-bottom: 1px solid $color-range;
 
+    @include media(m) {
+      padding-left: 17px;
+    }
+
     &:last-child {
       border-bottom: none;
     }
@@ -201,5 +205,11 @@
 }
 
 .select2-container--bank .select2-selection--single {
+  outline: none;
+}
+
+.select2-container--bank *,
+.select2-container--bank *:hover,
+.select2-container--bank *:focus {
   outline: none;
 }
