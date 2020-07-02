@@ -28,7 +28,7 @@ var webpack = require('webpack-stream');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 
-var isDev = true;
+var isDev = false;
 
 gulp.task('css', function () {
   return gulp.src('source/sass/style.scss')
