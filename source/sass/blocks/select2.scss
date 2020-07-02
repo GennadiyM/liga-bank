@@ -100,6 +100,7 @@
     .select2-selection--multiple {
       border-top-left-radius: 0;
       border-top-right-radius: 0;
+      outline: none;
     }
   }
 
@@ -108,6 +109,7 @@
     .select2-selection--multiple {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
+      outline: none;
     }
   }
 
@@ -155,9 +157,6 @@
       color: $main-background;
     }
 
-    &[aria-selected="true"] {
-      //background-color: #dddddd;
-    }
 
     .select2-results__option {
       padding-left: 1em;
@@ -202,10 +201,6 @@
     display: block;
     padding: 6px;
   }
-}
-
-.select2-container--bank .select2-selection--single {
-  outline: none;
 }
 
 .select2-container--bank *,
