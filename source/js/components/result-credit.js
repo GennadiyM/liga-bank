@@ -1,5 +1,5 @@
 import Inputmask from 'inputmask';
-import {delClassError, addEventListener, removeEventListener, onFocusInput} from './utils';
+import {delClassError, addEventListener, removeEventListener, onFocusInput, getStringOfNumb} from './utils';
 
 var NUMBER_CASE = 10;
 var LENGHT_NUMBER_CASE = 4;
@@ -210,10 +210,10 @@ class ResultCredit {
   }
 
   getHtmlResult() {
-    this.blocks.main.summerValue.innerHTML = this.parameters.summer + Prefix.CURRENCY;
-    this.blocks.main.rateValue.innerHTML = this.parameters.rate + Prefix.PERCENT;
-    this.blocks.main.paymentValue.innerHTML = this.parameters.monthPayment + Prefix.CURRENCY;
-    this.blocks.main.incomeValue.innerHTML = this.parameters.income + Prefix.CURRENCY;
+    this.blocks.main.summerValue.innerHTML = getStringOfNumb(this.parameters.summer) + Prefix.CURRENCY;
+    this.blocks.main.rateValue.innerHTML = getStringOfNumb(this.parameters.rate) + Prefix.PERCENT;
+    this.blocks.main.paymentValue.innerHTML = getStringOfNumb(this.parameters.monthPayment) + Prefix.CURRENCY;
+    this.blocks.main.incomeValue.innerHTML = getStringOfNumb(this.parameters.income) + Prefix.CURRENCY;
   }
 
   getNumberCase() {
@@ -221,7 +221,7 @@ class ResultCredit {
     do {
       stringOfNum = '0' + stringOfNum;
     } while (stringOfNum.length < LENGHT_NUMBER_CASE);
-    return stringOfNum;
+    return '№ ' + stringOfNum;
   }
 
   getValueForm() {

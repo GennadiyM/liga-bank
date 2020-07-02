@@ -216,8 +216,8 @@
             </div>
             <div class="promo__img">
               <picture>
-                <source type="image/webp" media="(min-width: 1200px)"
-                        srcset="img/slider/slide-3.webp 1x, img/slider/slide-3@2x.webp 2x">
+<!--                <source type="image/webp" media="(min-width: 1200px)"-->
+<!--                        srcset="img/slider/slide-3.webp 1x, img/slider/slide-3@2x.webp 2x">-->
                 <source type="image/webp" media="(min-width: 768px)"
                         srcset="img/slider/slide-3-tablet.webp 1x, img/slider/slide-3-tablet@2x.webp 2x">
                 <source type="image/webp" srcset="img/slider/slide-3-mob.webp 1x, img/slider/slide-3-mob@2x.webp 2x">
@@ -415,12 +415,9 @@
                         <div class="formArea formArea--calc">
                           <label class="formArea__label" for="mortgage-price">Стоимость недвижимости</label>
                           <div class="formArea__slot">
-                            <div class="calculate js-main-calc">
-                              <button class="calculate__btn" type="button" data-target="min"
-                                      aria-label="уменьшить"></button>
-                              <div class="calculate__area">
-                                <input class="calculate__input" data-value="2000000" data-min="1200000" data-max="25000000" data-error-message="Некорректное значение" data-prefix="рублей" data-step="100000" id="mortgage-price" type="text" inputmode="numeric" value="2 000 000 рублей">
-                              </div>
+                            <div class="calculate calculate--with-btn js-main-calc">
+                              <button class="calculate__btn" type="button" data-target="min" aria-label="уменьшить"></button>
+                              <input class="calculate__input" data-value="2000000" data-min="1200000" data-max="25000000" data-error-message="Некорректное значение" data-prefix="рублей" data-step="100000" id="mortgage-price" type="text" inputmode="numeric" value="2 000 000 рублей">
                               <button class="calculate__btn calculate__btn--plus" data-target="plus" type="button" aria-label="увеличить"></button>
                             </div>
                           </div>
@@ -434,9 +431,7 @@
                           <label class="formArea__label" for="mortgage-contribution">Первоначальный взнос</label>
                           <div class="formArea__slot">
                             <div class="calculate calculate--contribution">
-                              <div class="calculate__area">
-                                <input class="calculate__input" data-percent="10" data-prefix="рублей" data-range-step="5" id="mortgage-contribution" type="text" inputmode="numeric" value="200 000 рублей">
-                              </div>
+                              <input class="calculate__input" data-percent="10" data-prefix="рублей" data-range-step="5" id="mortgage-contribution" type="text" inputmode="numeric" value="200 000 рублей">
                             </div>
                           </div>
                           <div class="formArea__caption">
@@ -457,9 +452,7 @@
                           <label class="formArea__label" for="mortgage-term">Срок кредитования</label>
                           <div class="formArea__slot">
                             <div class="calculate calculate--term">
-                              <div class="calculate__area">
-                                <input class="calculate__input" data-min="5" data-max="30" data-prefix="год,года,лет" data-range-step="1" id="mortgage-term" type="text" inputmode="numeric" value="5 лет">
-                              </div>
+                              <input class="calculate__input" data-min="5" data-max="30" data-prefix="год,года,лет" data-range-step="1" id="mortgage-term" type="text" inputmode="numeric" value="5 лет">
                             </div>
                           </div>
                           <div class="formArea__slot">
@@ -500,11 +493,9 @@
                         <div class="formArea formArea--calc js-main-calc">
                           <label class="formArea__label" for="car-price">Стоимость автомобиля</label>
                           <div class="formArea__slot">
-                            <div class="calculate">
+                            <div class="calculate calculate--with-btn">
                               <button class="calculate__btn" type="button" aria-label="уменьшить" data-target="min"></button>
-                              <div class="calculate__area">
-                                <input class="calculate__input" data-value="2000000" data-min="500000" data-max="5000000" data-error-message="Некорректное значение" data-prefix="рублей" data-step="50000" id="car-price" type="text" inputmode="numeric" value="2 000 000 рублей">
-                              </div>
+                              <input class="calculate__input" data-value="2000000" data-min="500000" data-max="5000000" data-error-message="Некорректное значение" data-prefix="рублей" data-step="50000" id="car-price" type="text" inputmode="numeric" value="2 000 000 рублей">
                               <button class="calculate__btn calculate__btn--plus" type="button" data-target="plus" aria-label="увеличить"></button>
                             </div>
                           </div>
@@ -518,9 +509,7 @@
                           <label class="formArea__label" for="car-contribution">Первоначальный взнос</label>
                           <div class="formArea__slot">
                             <div class="calculate calculate--contribution">
-                              <div class="calculate__area">
-                                <input class="calculate__input" data-percent="20" data-prefix="рублей" data-error="500000" data-step="50000" data-range-step="5" id="car-contribution" type="text" inputmode="numeric" value="200 000 рублей">
-                              </div>
+                              <input class="calculate__input" data-percent="20" data-prefix="рублей" data-error="500000" data-step="50000" data-range-step="5" id="car-contribution" type="text" inputmode="numeric" value="200 000 рублей">
                             </div>
                           </div>
                           <div class="formArea__caption">
@@ -541,9 +530,7 @@
                           <label class="formArea__label" for="calc-term">Срок кредитования</label>
                           <div class="formArea__slot">
                             <div class="calculate calculate--term">
-                              <div class="calculate__area">
-                                <input class="calculate__input" data-min="1" data-max="5" data-prefix="год,года,лет" data-range-step="1" id="calc-term" type="text" inputmode="numeric" value="1 год">
-                              </div>
+                              <input class="calculate__input" data-min="1" data-max="5" data-prefix="год,года,лет" data-range-step="1" id="calc-term" type="text" inputmode="numeric" value="1 год">
                             </div>
                           </div>
                           <div class="formArea__slot">
@@ -589,11 +576,9 @@
                         <div class="formArea formArea--calc js-main-calc">
                           <label class="formArea__label" for="consumer-price">Сумма потребительского кредита</label>
                           <div class="formArea__slot">
-                            <div class="calculate">
+                            <div class="calculate calculate--with-btn">
                               <button class="calculate__btn" type="button" data-target="min" aria-label="уменьшить"></button>
-                              <div class="calculate__area">
-                                <input class="calculate__input" data-min="50000" data-value="2000000" data-max="3000000" data-error-message="Некорректное значение" data-prefix="рублей" data-step="50000" id="consumer-price" type="text" inputmode="numeric" value="2 000 000 рублей">
-                              </div>
+                              <input class="calculate__input" data-min="50000" data-value="2000000" data-max="3000000" data-error-message="Некорректное значение" data-prefix="рублей" data-step="50000" id="consumer-price" type="text" inputmode="numeric" value="2 000 000 рублей">
                               <button class="calculate__btn calculate__btn--plus" type="button" data-target="plus" aria-label="увеличить"></button>
                             </div>
                           </div>
@@ -607,9 +592,7 @@
                           <label class="formArea__label" for="consumer-term">Срок кредитования</label>
                           <div class="formArea__slot">
                             <div class="calculate calculate--term">
-                              <div class="calculate__area">
-                                <input class="calculate__input" data-min="1" data-max="7" data-prefix="год,года,лет" data-range-step="1" id="consumer-term" type="text" inputmode="numeric" value="1 год">
-                              </div>
+                              <input class="calculate__input" data-min="1" data-max="7" data-prefix="год,года,лет" data-range-step="1" id="consumer-term" type="text" inputmode="numeric" value="1 год">
                             </div>
                           </div>
                           <div class="formArea__slot">
@@ -650,7 +633,7 @@
                     <p class="grayBox__value">1 330 000 рублей</p>
                     <p class="grayBox__caption">Сумма ипотеки</p>
                   </div>
-                  <div class="grayBox__cell grayBox__cell--small js-result-rate">
+                  <div class="grayBox__cell js-result-rate">
                     <p class="grayBox__value">9,40%</p>
                     <p class="grayBox__caption">Процентная ставка</p>
                   </div>
@@ -660,18 +643,18 @@
                     <p class="grayBox__value">27 868 рублей</p>
                     <p class="grayBox__caption">Ежемесячный платеж</p>
                   </div>
-                  <div class="grayBox__cell grayBox__cell--small js-result-income">
+                  <div class="grayBox__cell js-result-income">
                     <p class="grayBox__value">61 929 рублей</p>
                     <p class="grayBox__caption">Необходимый доход</p>
                   </div>
                 </div>
               </div>
-              <div class="grayBox__btn btn btn--w100 js-result-btn">Оформить заявку</div>
+              <div class="grayBox__btn btn btn--w90 js-result-btn">Оформить заявку</div>
             </div>
             <div class="credit__boxInfo js-result-info">
               <p class="grayBox__title">Наш банк не выдаёт <span class="js-result-info-name">ипотечные кредиты</span>
                 меньше <span class="js-result-treshold">200 000</span> рублей.</p>
-              <p>Попробуйте использовать другие параметры для расчёта.</p>
+              <p class="grayBox__text">Попробуйте использовать другие параметры для расчёта.</p>
             </div>
           </div>
 
@@ -930,7 +913,7 @@
 </div>
 <div class="popup popup--result js-result-popup">
   <button class="popup__close js-result-popup-close" type="button" aria-label="Закрыть попап"></button>
-  <p class="popup__title">Спасибо за обращение в наш банк</p>
+  <p class="popup__title">Спасибо за обращение в наш банк.</p>
   <p class="popup__text">Наш менедежер скоро свяжется с вами по указанному номеру телефона.</p>
 </div>
 <div class="overlay js-overlay"></div>
