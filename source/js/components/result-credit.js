@@ -37,7 +37,9 @@ var Selector = {
   FORM_BTN: '.js-result-form-submit',
   FORM_VALIDATION: '.js-result-form-validation input',
   RESULT_POPUP: '.js-result-popup',
-  RESULT_POPUP_CLOSE: '.js-result-popup-close'
+  RESULT_POPUP_CLOSE: '.js-result-popup-close',
+  FORM_LIST_ITEM: '.form__listItem',
+  FORM_SLOT: '.js-result-form-payment .formArea__slot',
 };
 
 var Class = {
@@ -47,11 +49,14 @@ var Class = {
 class ResultCredit {
   constructor() {
     this.removedFlag = false;
+    this.removedStartPayment = false;
     this.initFormFlag = false;
     this.result = document.querySelector(Selector.RESULT);
     this.resultPopup = document.querySelector(Selector.RESULT_POPUP);
     this.resulPopupClose = document.querySelector(Selector.RESULT_POPUP_CLOSE);
     this.inputsValidation = document.querySelectorAll(Selector.FORM_VALIDATION);
+    this.slotStartPayment = document.querySelector(Selector.FORM_SLOT);
+    this.parentStartPayment = this.slotStartPayment.closest(Selector.FORM_LIST_ITEM);
     this.blocks = {
       form: {
         container: document.querySelector(Selector.FORM_CONTAINER),
@@ -89,6 +94,7 @@ class ResultCredit {
 
     this.onClickBtnResult = function () {
       this.getValueForm();
+      window.credit.classList.add(window.Class.FORM_SHOW);
       this.blocks.form.client.focus();
       if (localStorage.getItem('name')) {
         this.blocks.form.client.value = localStorage.getItem('name');
@@ -104,7 +110,6 @@ class ResultCredit {
         delClassError(currentValue);
       });
       this.blocks.form.btn.addEventListener('click', this.onClickBtnSubmit);
-      window.credit.classList.add(window.Class.FORM_SHOW);
       this.initFormFlag = true;
     }.bind(this);
 
@@ -224,9 +229,23 @@ class ResultCredit {
     this.blocks.form.termValue.setAttribute('value', this.parameters.term);
     this.blocks.form.number.setAttribute('value', this.getNumberCase());
     this.blocks.form.summerValue.value = this.parameters.summerString;
-    this.blocks.form.paymentValue.value = this.parameters.startPayment;
+
     this.blocks.form.termValue.value = this.parameters.term;
     this.blocks.form.number.value = this.getNumberCase();
+
+    if (!this.parameters.startPayment) {
+      this.parentStartPayment.style = 'display: none';
+      if (!this.removedStartPayment) {
+        this.removedStartPayment = this.slotStartPayment.removeChild(this.blocks.form.paymentValue);
+      }
+    } else {
+      if (this.removedStartPayment) {
+        this.parentStartPayment.style = '';
+        this.slotStartPayment.insertAdjacentElement('beforeend', this.removedStartPayment);
+        this.removedStartPayment = false;
+      }
+      this.blocks.form.paymentValue.value = this.parameters.startPayment;
+    }
   }
 
   renderResult(parameters) {
@@ -282,7 +301,6 @@ class ResultCredit {
 
   init() {
     this.isStorageSupport = true;
-
     try {
       localStorage.setItem('name', '');
       localStorage.setItem('phone', '');
