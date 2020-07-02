@@ -69,6 +69,7 @@ var select = function () {
   });
 
   $(selectInput).on('select2:select', function () {
+    Result.getDestroyForm();
     Result.init();
 
     var target = selectInput.value;

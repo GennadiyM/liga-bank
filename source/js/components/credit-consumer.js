@@ -97,6 +97,8 @@ class CreditConsumer {
       monthPayment: Math.round(this.getMonthPayment()),
       income: Math.round(this.getIncome()),
       paymentThreshold: this.paymentTreshold,
+      term: this.CalcTerm.getInputValueString(this.CalcTerm.getInputValueInMonth() / 12),
+      summerString: this.CalcSummer.getInputValueString(),
     };
   }
 

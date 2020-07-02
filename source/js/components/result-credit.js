@@ -1,3 +1,6 @@
+import Inputmask from 'inputmask';
+import {delClassError, addEventListener, removeEventListener, onFocusInput} from './utils';
+
 var NUMBER_CASE = 10;
 var LENGHT_NUMBER_CASE = 4;
 
@@ -25,17 +28,30 @@ var Selector = {
   FORM_SUMMER_VALUE: '.js-result-form-summer .formArea__input',
   FORM_PAYMENT_VALUE: '.js-result-form-payment .formArea__input',
   FORM_TERM_VALUE: '.js-result-form-term .formArea__input',
-  FORM_CLIENT: '.js-result-form-client',
-  FORM_PHONE: '.js-result-form-phone',
-  FORM_EMAIL: '.js-result-form-email',
+  FORM_AREA_CLIENT: '.js-result-form-client',
+  FORM_AREA_PHONE: '.js-result-form-phone',
+  FORM_AREA_EMAIL: '.js-result-form-email',
+  FORM_CLIENT: '.js-result-form-client input',
+  FORM_PHONE: '.js-result-form-phone input',
+  FORM_EMAIL: '.js-result-form-email input',
   FORM_BTN: '.js-result-form-submit',
+  FORM_VALIDATION: '.js-result-form-validation input',
+  RESULT_POPUP: '.js-result-popup',
+  RESULT_POPUP_CLOSE: '.js-result-popup-close'
 };
 
+var Class = {
+  ERROR_FORM: 'grayBox--error',
+};
 
 class ResultCredit {
   constructor() {
     this.removedFlag = false;
+    this.initFormFlag = false;
     this.result = document.querySelector(Selector.RESULT);
+    this.resultPopup = document.querySelector(Selector.RESULT_POPUP);
+    this.resulPopupClose = document.querySelector(Selector.RESULT_POPUP_CLOSE);
+    this.inputsValidation = document.querySelectorAll(Selector.FORM_VALIDATION);
     this.blocks = {
       form: {
         container: document.querySelector(Selector.FORM_CONTAINER),
@@ -45,6 +61,10 @@ class ResultCredit {
         summerValue: document.querySelector(Selector.FORM_SUMMER_VALUE),
         paymentValue: document.querySelector(Selector.FORM_PAYMENT_VALUE),
         termValue: document.querySelector(Selector.FORM_TERM_VALUE),
+
+        areaClient: document.querySelector(Selector.FORM_AREA_CLIENT),
+        areaPhone: document.querySelector(Selector.FORM_AREA_PHONE),
+        areaEmail: document.querySelector(Selector.FORM_AREA_EMAIL),
 
         client: document.querySelector(Selector.FORM_CLIENT),
         phone: document.querySelector(Selector.FORM_PHONE),
@@ -69,9 +89,105 @@ class ResultCredit {
 
     this.onClickBtnResult = function () {
       this.getValueForm();
-      window.credit.classList.toggle(window.Class.FORM_SHOW, true);
-
+      this.blocks.form.client.focus();
+      if (localStorage.getItem('name')) {
+        this.blocks.form.client.value = localStorage.getItem('name');
+      }
+      if (localStorage.getItem('phone')) {
+        this.blocks.form.phone.value = localStorage.getItem('phone');
+      }
+      if (localStorage.getItem('email')) {
+        this.blocks.form.email.value = localStorage.getItem('email');
+      }
+      this.inputsValidation.forEach(function (currentValue) {
+        addEventListener(currentValue, onFocusInput);
+        delClassError(currentValue);
+      });
+      this.blocks.form.btn.addEventListener('click', this.onClickBtnSubmit);
+      window.credit.classList.add(window.Class.FORM_SHOW);
+      this.initFormFlag = true;
     }.bind(this);
+
+    this.onClickBtnSubmit = function (evt) {
+      evt.preventDefault();
+      this.setLocalstorage();
+
+      if (!this.getValidation()) {
+        this.blocks.form.container.classList.remove(Class.ERROR_FORM);
+        this.animationFlag = this.blocks.form.container.offsetWidth;
+        this.blocks.form.container.classList.add(Class.ERROR_FORM);
+        return;
+      }
+
+      NUMBER_CASE++;
+      window.credit.classList.remove(window.Class.FORM_SHOW);
+      this.getDestroyForm();
+      this.getShowPopup();
+    }.bind(this);
+
+    this.onWindowKeydown = function (evt) {
+      evt.preventDefault();
+      if (evt.keyCode === window.Keydown.ESC) {
+        this.getClosePopup();
+      }
+      window.removeEventListener('keydown', this.onWindowKeydown);
+    }.bind(this);
+
+    this.onClosePopup = function (env) {
+      env.preventDefault();
+      this.getClosePopup();
+    }.bind(this);
+  }
+
+  getShowPopup() {
+    this.resultPopup.classList.add(window.Class.POPUP_SHOW);
+    window.overlay.classList.add(window.Class.OVERLAY_SHOW);
+    window.body.classList.add(window.Class.NO_SCROLL);
+    window.overlay.addEventListener('click', this.onClosePopup);
+    window.addEventListener('keydown', this.onWindowKeydown);
+    this.resulPopupClose.addEventListener('click', this.onClosePopup);
+  }
+
+  getClosePopup() {
+    this.resultPopup.classList.remove(window.Class.POPUP_SHOW);
+    window.overlay.classList.remove(window.Class.OVERLAY_SHOW);
+    window.body.classList.remove(window.Class.NO_SCROLL);
+    this.resulPopupClose.removeEventListener('click', this.onClosePopup);
+  }
+
+  getDestroyForm() {
+    if (this.initFormFlag) {
+      this.initFormFlag = false;
+      this.blocks.form.container.classList.remove(Class.ERROR_FORM);
+      this.blocks.form.btn.removeEventListener('click', this.onClickBtnSubmit);
+      this.inputsValidation.forEach(function (currentValue) {
+        removeEventListener(currentValue, onFocusInput);
+      });
+    }
+  }
+
+  getValidation() {
+    if (!this.blocks.form.client.value || !this.blocks.form.phone.value || !this.blocks.form.email.value) {
+      if (!this.blocks.form.client.value) {
+        this.blocks.form.areaClient.classList.add(window.Class.AREA_ERROR);
+      }
+      if (!this.blocks.form.phone.value) {
+        this.blocks.form.areaPhone.classList.add(window.Class.AREA_ERROR);
+      }
+      if (!this.blocks.form.email.value) {
+        this.blocks.form.areaEmail.classList.add(window.Class.AREA_ERROR);
+      }
+      this.blocks.form.container.classList.add(Class.ERROR_FORM);
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  setLocalstorage() {
+    localStorage.setItem('name', this.blocks.form.client.value);
+    localStorage.setItem('phone', this.blocks.form.phone.value);
+    localStorage.setItem('email', this.blocks.form.email.value);
   }
 
   set(parameters) {
@@ -82,7 +198,7 @@ class ResultCredit {
       summer: parameters.summer,
       paymentThreshold: parameters.paymentThreshold,
       term: parameters.term,
-      summerString: parameters.summerString
+      summerString: parameters.summerString,
     };
     this.parameters.startPayment = parameters.startPayment ? parameters.startPayment : false;
   }
@@ -95,11 +211,11 @@ class ResultCredit {
   }
 
   getNumberCase() {
-    var stringNumber = NUMBER_CASE.toString();
+    var stringOfNum = NUMBER_CASE.toString();
     do {
-      stringNumber = '0' + stringNumber;
-    } while (stringNumber.length < LENGHT_NUMBER_CASE);
-    return stringNumber;
+      stringOfNum = '0' + stringOfNum;
+    } while (stringOfNum.length < LENGHT_NUMBER_CASE);
+    return stringOfNum;
   }
 
   getValueForm() {
@@ -113,7 +229,7 @@ class ResultCredit {
     this.blocks.form.number.value = this.getNumberCase();
   }
 
-    renderResult(parameters) {
+  renderResult(parameters) {
     this.set(parameters);
     if (this.parameters.summer > this.parameters.paymentThreshold) {
       if (!this.removedFlag) {
@@ -165,8 +281,20 @@ class ResultCredit {
   }
 
   init() {
+    this.isStorageSupport = true;
+
+    try {
+      localStorage.setItem('name', '');
+      localStorage.setItem('phone', '');
+      localStorage.setItem('email', '');
+    } catch (err) {
+      this.isStorageSupport = false;
+    }
+
+    this.Phone = new Inputmask('+7 (999) 999-9999');
+    this.Phone.mask(Selector.FORM_PHONE);
     this.blocks.main.btn.addEventListener('click', this.onClickBtnResult);
   }
-
 }
+
 export {ResultCredit};

@@ -125,6 +125,9 @@ class CreditCar {
       monthPayment: Math.round(this.getMonthPayment()),
       income: Math.round(this.getIncome()),
       paymentThreshold: this.paymentTreshold,
+      startPayment: this.CalcPayment.getInputValueString(),
+      term: this.CalcTerm.getInputValueString(this.CalcTerm.getInputValueInMonth() / 12),
+      summerString: this.CalcSummer.getInputValueString(),
     };
   }
 

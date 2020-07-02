@@ -102,10 +102,7 @@
   }
 }
 
-.services__main p {
-  @include style-reset;
-
-  max-width: 100%;
+.services__main li {
   font-size: 18px;
   line-height: 130%;
 
