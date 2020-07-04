@@ -10,13 +10,10 @@ import contacts from './components/contacts.js';
 import mobMenu from './components/menu.js';
 import scroll from './components/scroll.js';
 
-document.addEventListener('DOMContentLoaded', function () {
+window.onload = function () {
   utils();
   select();
   popupLogin();
-});
-
-window.onload = function () {
   promo();
   services();
   contacts();
