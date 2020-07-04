@@ -27,6 +27,8 @@ var include = require('posthtml-include');
 var webpack = require('webpack-stream');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+var CompressionPlugin = require('compression-webpack-plugin');
 
 var isDev = false;
 
@@ -63,10 +65,28 @@ gulp.task('js', function () {
               }
             },
           }
-        ]
-      }
+        ],
+      },
+      plugins: [
+        new UglifyJsPlugin({
+          uglifyOptions: {
+            output: {
+              comments: false,
+            },
+            parse: {},
+            compress: {},
+            mangle: true,
+            toplevel: false,
+            nameCache: null,
+            ie8: false,
+          }
+        }),
+        new CompressionPlugin({
+          algorithm: 'gzip',
+        }),
+      ],
     }))
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(gulp.dest('build/js'))
     .pipe(server.stream());
 });
