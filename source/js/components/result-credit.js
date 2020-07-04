@@ -97,8 +97,8 @@ class ResultCredit {
       this.getValueForm();
       window.credit.classList.add(window.Class.FORM_SHOW);
       this.blocks.form.client.focus();
-      if (localStorage.getItem('name')) {
-        this.blocks.form.client.value = localStorage.getItem('name');
+      if (localStorage.getItem('name2')) {
+        this.blocks.form.client.value = localStorage.getItem('name2');
       }
       if (localStorage.getItem('phone')) {
         this.blocks.form.phone.value = localStorage.getItem('phone');
