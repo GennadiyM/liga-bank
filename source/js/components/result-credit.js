@@ -191,7 +191,7 @@ class ResultCredit {
   }
 
   setLocalstorage() {
-    localStorage.setItem('name', this.blocks.form.client.value);
+    localStorage.setItem('nameAndFamily', this.blocks.form.client.value);
     localStorage.setItem('phone', this.blocks.form.phone.value);
     localStorage.setItem('email', this.blocks.form.email.value);
   }
@@ -303,7 +303,7 @@ class ResultCredit {
   init() {
     this.isStorageSupport = true;
     try {
-      localStorage.setItem('name', '');
+      localStorage.setItem('nameAndFamily', '');
       localStorage.setItem('phone', '');
       localStorage.setItem('email', '');
     } catch (err) {
