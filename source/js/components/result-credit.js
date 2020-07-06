@@ -182,15 +182,14 @@ class ResultCredit {
       }
       if (!this.blocks.form.email.value) {
         this.blocks.form.areaEmail.classList.add(window.Class.AREA_ERROR);
+      } else {
+        if (!this.getValidateEmail(this.blocks.form.email.value)) {
+          this.blocks.form.areaEmail.classList.add(window.Class.AREA_ERROR);
+        }
       }
       this.blocks.form.container.classList.add(Class.ERROR_FORM);
       return false;
     } else {
-      if (!this.getValidateEmail(this.blocks.form.email.value)) {
-        this.blocks.form.areaEmail.classList.add(window.Class.AREA_ERROR);
-        this.blocks.form.container.classList.add(Class.ERROR_FORM);
-        return false;
-      }
       return true;
     }
   }
