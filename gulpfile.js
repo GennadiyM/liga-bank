@@ -46,6 +46,7 @@ gulp.task('css', function () {
     .pipe(server.stream());
 });
 
+
 gulp.task('js', function () {
   return gulp.src('source/js/app.js')
     .pipe(webpack({
@@ -65,28 +66,10 @@ gulp.task('js', function () {
               }
             },
           }
-        ],
-      },
-      plugins: [
-        new UglifyJsPlugin({
-          uglifyOptions: {
-            output: {
-              comments: false,
-            },
-            parse: {},
-            compress: {},
-            mangle: true,
-            toplevel: false,
-            nameCache: null,
-            ie8: false,
-          }
-        }),
-        new CompressionPlugin({
-          algorithm: 'gzip',
-        }),
-      ],
+        ]
+      }
     }))
-    // .pipe(uglify())
+    .pipe(uglify())
     .pipe(gulp.dest('build/js'))
     .pipe(server.stream());
 });
